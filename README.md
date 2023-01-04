@@ -51,9 +51,6 @@ scoreboard or return to the main menu.
 An additional possible feature would be a good looking user interface with clickable cells and
 different colors.
 ___
-<<<<<<< Updated upstream
-visual library: tkinter or pygame
-=======
 ##### visual library: **PySimpleGUI**
 
 ##### Colors:
@@ -66,4 +63,3 @@ visual library: tkinter or pygame
   - Background color: #2c2825
   - Font color: #fff7e2
   
->>>>>>> Stashed changes

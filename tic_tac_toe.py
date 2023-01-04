@@ -9,7 +9,7 @@ layout = [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
              [sg.Text("", size=(5, 1)), sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
 
 # Create the window
-window = sg.Window("Tic-Tac-Toe", layout, element_justification="center")
+window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True)
 
 # Create a list to store the state of the game
 board = [[0 for _ in range(3)] for _ in range(3)]
@@ -40,7 +40,7 @@ while True:
         for row in range(3):
             for col in range(3):
                 board[row][col] = 0
-                window[(row, col)].update(" ", button_color=("white", "white"))
+                window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
     # Check if someone has won the game
     for row in range(3):
@@ -50,7 +50,7 @@ while True:
             for row in range(3):
                 for col in range(3):
                     board[row][col] = 0
-                    window[(row, col)].update(" ", button_color=("white", "white"))
+                    window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
     for col in range(3):
         if board[0][col] == board[1][col] == board[2][col] and board[0][col] != 0:
             sg.popup(f"Player {'X' if board[0][col] == 1 else 'O'} has won!")
@@ -58,21 +58,21 @@ while True:
             for row in range(3):
                 for col in range(3):
                     board[row][col] = 0
-                    window[(row, col)].update(" ", button_color=("white", "white"))
+                    window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] != 0:
         sg.popup(f"Player {'X' if board[0][0] == 1 else 'O'} has won!")
         player = -player
         for row in range(3):
             for col in range(3):
                 board[row][col] = 0
-                window[(row, col)].update(" ", button_color=("white", "white"))
+                window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
     if board[0][2] == board[1][1] == board[2][0] and board[0][2] != 0:
         sg.popup(f"Player {'X' if board[0][2] == 1 else 'O'} has won!")
         player = -player
         for row in range(3):
             for col in range(3):
                 board[row][col] = 0
-                window[(row, col)].update(" ", button_color=("white", "white"))
+                window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
 
 # Close the window

@@ -51,15 +51,4 @@ scoreboard or return to the main menu.
 An additional possible feature would be a good looking user interface with clickable cells and
 different colors.
 ___
-##### visual library: **PySimpleGUI**
-
-##### Colors:
-- Main Color Scheme: ```sg.ChangeLookAndFeel('DarkAmber')```
-  - Main color: #FCCB53
-  - Secondary color 2: #FC9E47
-  - Third color: #FCF060
-  - Complementary color 1: #703AFC
-  - Complementary color 2: #B8F1FF
-  - Background color: #2c2825
-  - Font color: #fff7e2
-  
+visual library: tkinter or pygame

@@ -73,36 +73,36 @@ def check_win():
 
 # define the main game loop
 while not game_over:
-    # print the grid
-    print_grid()
-    # prompt the user for a move
-    column = int(input('Enter column: '))
+	# print the grid
+	print_grid()
+	# prompt the user for a move
+	column = int(input('Enter column: '))
 
-    # check if the move is valid
-    if not is_valid_move(column):
-        print('Invalid move, try again')
-        continue
+	# check if the move is valid
+	if not is_valid_move(column):
+		print('Invalid move, try again')
+		continue
 
-    # make the move
-    make_move(column)
+	# make the move
+	make_move(column)
 
-    # increment the number of moves made
-    num_moves += 1
+	# increment the number of moves made
+	num_moves += 1
 
-    # check if the current player has won
-    if check_win():
-        print(f'Player {current_player} wins!')
-        game_over = True
-        continue
+	# check if the current player has won
+	if check_win():
+		print(f'Player {current_player} wins!')
+		game_over = True
+		continue
 
-    # check if the game is a draw
-    if num_moves == num_rows * num_columns:
-        print('The game is a draw!')
-        game_over = True
-        continue
+	# check if the game is a draw
+	if num_moves == num_rows * num_columns:
+		print('The game is a draw!')
+		game_over = True
+		continue
 
-    # switch players
-    switch_player()
-    # print the final grid
-    print_grid()
-    print("___________________\n\n")
+	# switch players
+	switch_player()
+	# print the final grid
+	print_grid()
+	print("___________________\n\n")

@@ -15,7 +15,6 @@ layout = [[sg.VPush()],
           [sg.Button('Exit',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]]
 
 
-
 # Create the window
 window = sg.Window('Menu', layout, size=(1100, 700), resizable=True)
 

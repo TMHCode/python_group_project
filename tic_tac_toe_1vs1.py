@@ -9,7 +9,7 @@ layout = [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
              [sg.Text("", size=(5, 1)), sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
 
 # Create the window
-window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True)
+window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True, element_justification="center")
 
 # Create a list to store the state of the game
 board = [[0 for _ in range(3)] for _ in range(3)]

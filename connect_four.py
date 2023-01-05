@@ -75,14 +75,15 @@ while True:
         for row in range(ROWS-1, -1, -1):
             if board[row][c] == ' ':
                 board[row][c] = player
+                print(board)
                 break
 
         # Update the bottommost button in the column to show that it has been clicked
-        debug
         for row in range(ROWS-1, -1, -1):
-            print(board[row][c], row, c)
+            #print(board[row][c], row, c)
+            print(window.find_element((row, c)).GetText())
             if board[row][c] == ' ':
-                window.find_element((row+1, c)).Update(player)
+                window.find_element((row+1, c)).Update(board[row+1][c])
                 break
 
         # Check if the player has won the game

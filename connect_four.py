@@ -1,107 +1,129 @@
 import PySimpleGUI as sg
 
-# Constants for the game board
-ROWS = 6
-COLS = 7
+## Game constants
+ROW_COUNT = 6
+COL_COUNT = 7
 
-# Create the game board as a 2D list
-board = [[' ' for _ in range(COLS)] for _ in range(ROWS)]
-
-
-# Function to draw the game board
-def draw_board():
-    # Create a graphical representation of the game board
-    board_layout = [[sg.Button(board[r][c], size=(5, 2), pad=(0, 0), key=(r, c)) for c in range(COLS)] for r in range(ROWS)]
-    return sg.Column(board_layout, key='_BOARD_')
+# Set the size and color scheme of the window
+sg.ChangeLookAndFeel('DarkAmber')  # Add a touch of color
+sg.SetOptions(font=('Helvetica', 18))
 
 
-# Function to check for a win
-def check_win(piece):
-    # Check for horizontal wins
-    for row in range(ROWS):
-        for col in range(COLS-3):
-            if board[row][col] == piece and board[row][col+1] == piece and board[row][col+2] == piece and board[row][col+3] == piece:
+## Functions
+# function for checking win conditions
+def check_win(grid, player):
+    # Check horizontal win
+    for r in range(ROW_COUNT):
+        for c in range(COL_COUNT - 3):
+            if grid[r][c] == player and grid[r][c + 1] == player and grid[r][c + 2] == player and grid[r][c + 3] == player:
                 return True
-    # Check for vertical wins
-    for row in range(ROWS-3):
-        for col in range(COLS):
-            if board[row][col] == piece and board[row+1][col] == piece and board[row+2][col] == piece and board[row+3][col] == piece:
+
+    # Check vertical win
+    for r in range(ROW_COUNT - 3):
+        for c in range(COL_COUNT):
+            if grid[r][c] == player and grid[r + 1][c] == player and grid[r + 2][c] == player and grid[r + 3][c] == player:
                 return True
-    # Check for diagonal wins
-    for row in range(ROWS-3):
-        for col in range(COLS-3):
-            if board[row][col] == piece and board[row+1][col+1] == piece and board[row+2][col+2] == piece and board[row+3][col+3] == piece:
+
+    # Check diagonal win (top-left to bottom-right)
+    for r in range(ROW_COUNT - 3):
+        for c in range(COL_COUNT - 3):
+            if grid[r][c] == player and grid[r + 1][c + 1] == player and grid[r + 2][c + 2] == player and grid[r + 3][c + 3] == player:
                 return True
-    for row in range(ROWS-3):
-        for col in range(COLS-3):
-            if board[row][col+3] == piece and board[row+1][col+2] == piece and board[row+2][col+1] == piece and board[row+3][col] == piece:
+
+    # Check diagonal win (bottom-left to top-right)
+    for r in range(3, ROW_COUNT):
+        for c in range(COL_COUNT - 3):
+            if grid[r][c] == player and grid[r - 1][c + 1] == player and grid[r - 2][c + 2] == player and grid[r - 3][c + 3] == player:
                 return True
+
     return False
 
 
-# Function to check if the board is full
-def check_full():
-    for row in range(ROWS):
-        for col in range(COLS):
-            if board[row][col] == ' ':
+# function for checking if the board is full (draw)
+def check_full(grid):
+    for r in range(ROW_COUNT):
+        for c in range(COL_COUNT):
+            if grid[r][c] == ' ':
                 return False
     return True
 
-# Create the layout for the game
-layout = [
-    [sg.Text('Connect Four', size=(30, 1), font=('Helvetica', 20))],
-    [draw_board()],
-    [sg.Button('Quit', size=(10, 2))]
-]
 
-# Create the window and show the game
-window = sg.Window('Connect Four', layout, size=(750, 750))
+# function that creates the PySimpleGUI layout
+def create_layout():
+    return [
+                [sg.VPush()],
+                [sg.Push(), sg.Text('Connect Four', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
+                *[[sg.Button(' ', button_color=('white', 'black'), size=(5, 2), pad=(0, 0), key=(r, c)) for c in range(COL_COUNT)] for r in range(ROW_COUNT)],
+                [sg.Push(), sg.Button('Quit', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8),
+                    sg.Button('New Game', size=(14, 2), pad=(50, 15), border_width=10), sg.Push()],
+                [sg.VPush()]
+            ]
 
-# Initialize the player to be "X"
-player = "X"
 
+# function that creates the PySimpleGUI window
+def create_window():
+    return sg.Window('Connect 4', layout, size=(1100, 700), resizable=True, element_justification='center')
+
+## Setting up start variables
+# Create the game grid
+grid = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
+
+# Create the layout for the game window
+layout = create_layout()
+
+# Create the game window
+window = create_window()
+
+# Game variables
+current_player = 'P1'
+
+## Game loop
 while True:
-    # Get the next event in the game
+    # Get the button click event
     event, values = window.read()
-
-    # If the event is "Quit" then close the window and exit the game
-    if event == 'Quit' or event is None:
-        window.close()
+    if event is None:
         break
 
-    # If the event is a button click, then place a piece on the board
-    if event[0] is not None and event[1] is not None:
-        r, c = event
-        for row in range(ROWS-1, -1, -1):
-            if board[row][c] == ' ':
-                board[row][c] = player
+    if event == 'Quit':
+        break
+
+    if event == 'New Game':
+        grid = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
+        window.close()
+        layout = create_layout()
+        window = create_window()
+        current_player = 'P1'
+        continue
+
+    # Get the row and column of the button clicked
+    row, col = event
+
+    # Update the grid and window if the column is not full
+    if grid[0][col] == ' ':
+        for r in range(ROW_COUNT - 1, -1, -1):
+            if grid[r][col] == ' ':
+                grid[r][col] = current_player
+                if current_player == 'P1':
+                    window[(r, col)].update(button_color=('white', '#6F3AFC'))
+                else:
+                    window[(r, col)].update(button_color=('white', '#FCF060'))
                 break
 
-        # Update the bottommost button in the column to show that it has been clicked
-        debug
-        for row in range(ROWS-1, -1, -1):
-            print(board[row][c], row, c)
-            if board[row][c] == ' ':
-                window.find_element((row+1, c)).Update(player)
-                break
-
-        # Check if the player has won the game
-        if check_win(player):
-            sg.popup(f"Player {player} has won!")
-            window.close()
+        # Check if the current player has won
+        if check_win(grid, current_player):
+            sg.popup('Player ' + current_player + ' wins!')
             break
 
         # Check if the board is full
-        if check_full():
-            sg.popup("The game is a draw!")
-            window.close()
+        if check_full(grid):
+            sg.popup('The board is full!')
             break
 
-        # Switch to the other player
-        if player == "X":
-            player = "O"
+        # Toggle the current player
+        if current_player == 'P1':
+            current_player = 'P2'
         else:
-            player = "X"
+            current_player = 'P1'
 
-    # Redraw the board
-    window.Element('_BOARD_').update(draw_board())
+## Close the window
+window.close()

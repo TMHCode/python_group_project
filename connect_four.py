@@ -1,12 +1,12 @@
 import PySimpleGUI as sg
+import menu
+
+from layouts import create_connect_four_layout
+
 
 ## Game constants
 ROW_COUNT = 6
 COL_COUNT = 7
-
-# Set the size and color scheme of the window
-sg.ChangeLookAndFeel('DarkAmber')  # Add a touch of color
-sg.SetOptions(font=('Helvetica', 18))
 
 
 ## Functions
@@ -48,82 +48,88 @@ def check_full(grid):
     return True
 
 
-# function that creates the PySimpleGUI layout
-def create_layout():
-    return [
-                [sg.VPush()],
-                [sg.Push(), sg.Text('Connect Four', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
-                *[[sg.Button(' ', button_color=('white', 'black'), size=(5, 2), pad=(0, 0), key=(r, c)) for c in range(COL_COUNT)] for r in range(ROW_COUNT)],
-                [sg.Push(), sg.Button('Quit', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8),
-                    sg.Button('New Game', size=(14, 2), pad=(50, 15), border_width=10), sg.Push()],
-                [sg.VPush()]
-            ]
+# function that creates a new clean game board
+def create_game():
+    # Create the game grid
+    grid_ = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
+
+    # Create the layout for the game window
+    layout_ = create_connect_four_layout(COL_COUNT, ROW_COUNT)
+
+    # Create the game window
+    window_ = sg.Window('Connect 4', layout_, size=(1100, 700), resizable=True, element_justification='center')
+
+    # Game variables
+    current_player_ = 'P1'
+    return grid_, layout_, window_, current_player_
 
 
-# function that creates the PySimpleGUI window
-def create_window():
-    return sg.Window('Connect 4', layout, size=(1100, 700), resizable=True, element_justification='center')
+# main function
+def main():
 
-## Setting up start variables
-# Create the game grid
-grid = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
+    # Set the font size of the window
+    sg.SetOptions(font=('Helvetica', 18))
 
-# Create the layout for the game window
-layout = create_layout()
+    ## Setting up start variables
+    grid, layout, window, current_player = create_game()
 
-# Create the game window
-window = create_window()
-
-# Game variables
-current_player = 'P1'
-
-## Game loop
-while True:
-    # Get the button click event
-    event, values = window.read()
-    if event is None:
-        break
-
-    if event == 'Quit':
-        break
-
-    if event == 'New Game':
-        grid = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
-        window.close()
-        layout = create_layout()
-        window = create_window()
-        current_player = 'P1'
-        continue
-
-    # Get the row and column of the button clicked
-    row, col = event
-
-    # Update the grid and window if the column is not full
-    if grid[0][col] == ' ':
-        for r in range(ROW_COUNT - 1, -1, -1):
-            if grid[r][col] == ' ':
-                grid[r][col] = current_player
-                if current_player == 'P1':
-                    window[(r, col)].update(button_color=('white', '#6F3AFC'))
-                else:
-                    window[(r, col)].update(button_color=('white', '#FCF060'))
-                break
-
-        # Check if the current player has won
-        if check_win(grid, current_player):
-            sg.popup('Player ' + current_player + ' wins!')
+    ## Game loop
+    while True:
+        # Get the button click event
+        event, values = window.read()
+        if event is None:
             break
 
-        # Check if the board is full
-        if check_full(grid):
-            sg.popup('The board is full!')
+        if event == 'Back':
+            window.close()
+            menu.main()
             break
 
-        # Toggle the current player
-        if current_player == 'P1':
-            current_player = 'P2'
-        else:
-            current_player = 'P1'
+        if event == 'New Game':
+            # create a new clean game board
+            window.close()
+            grid, layout, window, current_player = create_game()
+            continue
 
-## Close the window
-window.close()
+        # Get the row and column of the button clicked
+        row, col = event
+
+        # Update the grid and window if the column is not full
+        if grid[0][col] == ' ':
+            for r in range(ROW_COUNT - 1, -1, -1):
+                if grid[r][col] == ' ':
+                    grid[r][col] = current_player
+                    if current_player == 'P1':
+                        window[(r, col)].update(button_color=('white', '#6F3AFC'))
+                    else:
+                        window[(r, col)].update(button_color=('white', '#FCF060'))
+                    break
+
+            # Check if the current player has won
+            if check_win(grid, current_player):
+                sg.popup('Player ' + current_player + ' wins!')
+                # create a new clean game board
+                window.close()
+                grid, layout, window, current_player = create_game()
+                continue
+
+            # Check if the board is full
+            if check_full(grid):
+                sg.popup('The board is full!')
+                # create a new clean game board
+                window.close()
+                grid, layout, window, current_player = create_game()
+                continue
+
+            # Toggle the current player
+            if current_player == 'P1':
+                current_player = 'P2'
+            else:
+                current_player = 'P1'
+
+    ## Close the window
+    window.close()
+
+
+if __name__ == '__main__':
+    main()

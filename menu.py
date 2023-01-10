@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 import connect_four
-import tic_tac_toe_1vs1 as tic_tac_toe
+import tic_tac_toe_1vs1
 
 from layouts import create_menu_layout
 
@@ -26,7 +26,8 @@ def main():
             break
         elif event == 'Tic-Tac-Toe':
             window.close()
-            tic_tac_toe.main()
+            tic_tac_toe_1vs1.main()
+            break
         elif event == 'Rock-Paper-Scissors':
             pass
         elif event == 'Statistics':

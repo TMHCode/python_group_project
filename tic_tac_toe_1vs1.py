@@ -17,6 +17,7 @@ board = [[0 for _ in range(3)] for _ in range(3)]
 # Create a variable to store the current player (1 = O, -1 = X)
 player = 1
 
+
 # Main game loop
 while True:
     # Read the window

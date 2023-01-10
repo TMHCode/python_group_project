@@ -57,8 +57,8 @@ def create_tic_tac_toe_layout():
         [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
          [[sg.Button(" ", size=(5, 2), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
           for j in range(3)],
-         [sg.Button("Back", size=(10, 2), font=("Helvetica", 20), button_color=('black', '#B8F1FF')),
-          sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
+         [sg.Button("Back", size=(8, 2), border_width=8, button_color=('black', '#B8F1FF')),
+          sg.Button("New Game", size=(14, 2), border_width=10)]]
 
     ]
 # ----------

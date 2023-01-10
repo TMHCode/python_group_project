@@ -15,6 +15,7 @@ def main():
     # Create the window
     window = sg.Window('Menu', layout, size=(1100, 700), resizable=True)
 
+
     # Loop to handle events
     while True:
         event, values = window.read()

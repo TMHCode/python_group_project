@@ -28,6 +28,10 @@ def main():
             window.close()
             tic_tac_toe_1vs1.main()
             break
+        elif event == 'Rock-Paper-Scissors':
+            pass
+        elif event == 'Statistics':
+            pass
 
     window.close()
 

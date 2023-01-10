@@ -61,5 +61,4 @@ def create_tic_tac_toe_layout():
           sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
 
     ]
-
 # ----------

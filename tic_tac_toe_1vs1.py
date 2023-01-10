@@ -44,10 +44,7 @@ def main():
 
     sg.ChangeLookAndFeel("DarkAmber")
     # Create the layout of the game
-    layout = [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
-              [[sg.Button(" ", size=(5, 2), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
-               for j in range(3)],
-              [sg.Text("", size=(5, 1)), sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
+    layout = create_tic_tac_toe_layout()
 
     # Create the window
     window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True, element_justification="center")
@@ -65,6 +62,11 @@ def main():
 
         # If the window was closed, break out of the loop
         if event is None:
+            break
+
+        if event == 'Back':
+            window.close()
+            menu.main()
             break
 
         # If the event is a button press, update the board and switch players

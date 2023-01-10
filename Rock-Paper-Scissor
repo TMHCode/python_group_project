@@ -1,0 +1,28 @@
+from tkinter import *
+from PIL import Image, ImageTk
+
+# main window
+root = Tk()
+root.title("Rock Paper Scissor")
+root.configure(background="black")
+
+# picture
+rock_img = ImageTk.PhotoImage(Image.open("rock-user.png"))
+paper_img = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img = ImageTk.PhotoImage(Image.open("scissor.png"))
+rock_img_comp = ImageTk.PhotoImage(Image.open("rock.png"))
+paper_img_comp = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img_comp = ImageTk.PhotoImage(Image.open("scissor.png"))
+
+# insert picture
+user_label = Label(root, image=scissor_img, bg= "black")
+comp_label = Label(root, image=scissor_img_comp "black")
+comp_label.grid(row=1, column=0)
+user_label.grid(row=1, column=4)
+
+#score
+playerScore = Label(root, text=0, font=100, bg= "black", fg="white")
+computerScore = Label(root, text=0, font=100, bg= "black", fg="white")
+
+
+root.mainloop() 

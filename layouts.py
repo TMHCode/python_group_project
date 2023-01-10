@@ -48,3 +48,9 @@ def create_connect_four_layout(col_count, row_count):
         [sg.VPush()]
     ]
 # ----------
+
+
+# ----- LAYOUT for tic_tac_toe.py -----
+def create_tic_tac_toe_layout(col_count, row_count):
+    pass
+# ----------

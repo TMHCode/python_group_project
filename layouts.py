@@ -51,6 +51,14 @@ def create_connect_four_layout(col_count, row_count):
 
 
 # ----- LAYOUT for tic_tac_toe.py -----
-def create_tic_tac_toe_layout(col_count, row_count):
-    pass
+def create_tic_tac_toe_layout():
+
+    return[
+        [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
+         [[sg.Button(" ", size=(5, 2), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
+          for j in range(3)],
+         [sg.Button("Back", size=(10, 2), font=("Helvetica", 20), button_color=('black', '#B8F1FF')),
+          sg.Button("New Game", size=(10, 2), font=("Helvetica", 20))]]
+
+    ]
 # ----------

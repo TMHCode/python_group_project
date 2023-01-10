@@ -1,86 +1,28 @@
-import tkinter as tk
-import random
+from tkinter import *
+from PIL import Image, ImageTk
 
-# create the main window
-window = tk.Tk()
-window.title("Rock Paper Scissors")
+# main window
+root = Tk()
+root.title("Rock Paper Scissor")
+root.configure(background="black")
 
-# create a function to determine the winner
-def play(player, computer):
-  if player == computer:
-    result_text.set("It's a tie!")
-  elif player == "rock":
-    if computer == "paper":
-      result_text.set("Computer wins!")
-    else:
-      result_text.set("You win!")
-      global win_streak
-      win_streak += 1
-      ranking_list.insert(0, win_streak)
-      ranking_list.sort(reverse=True)
-      ranking_list_text.set(ranking_list)
-  elif player == "paper":
-    if computer == "scissors":
-      result_text.set("Computer wins!")
-    else:
-      result_text.set("You win!")
-      win_streak += 1
-      ranking_list.insert(0, win_streak)
-      ranking_list.sort(reverse=True)
-      ranking_list_text.set(ranking_list)
-  elif player == "scissors":
-    if computer == "rock":
-      result_text.set("Computer wins!")
-    else:
-      result_text.set("You win!")
-      win_streak += 1
-      ranking_list.insert(0, win_streak)
-      ranking_list.sort(reverse=True)
-      ranking_list_text.set(ranking_list)
+# picture
+rock_img = ImageTk.PhotoImage(Image.open("rock-user.png"))
+paper_img = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img = ImageTk.PhotoImage(Image.open("scissor.png"))
+rock_img_comp = ImageTk.PhotoImage(Image.open("rock.png"))
+paper_img_comp = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img_comp = ImageTk.PhotoImage(Image.open("scissor.png"))
 
-# create a function to handle the rock button click
-def rock():
-  global win_streak
-  win_streak = 0
-  computer = random.choice(["rock", "paper", "scissors"])
-  play("rock", computer)
-  animate()
+# insert picture
+user_label = Label(root, image=scissor_img, bg= "black")
+comp_label = Label(root, image=scissor_img_comp "black")
+comp_label.grid(row=1, column=0)
+user_label.grid(row=1, column=4)
 
-# create a function to handle the paper button click
-def paper():
-  global win_streak
-  win_streak = 0
-  computer = random.choice(["rock", "paper", "scissors"])
-  play("paper", computer)
-  animate()
+#score
+playerScore = Label(root, text=0, font=100, bg= "black", fg="white")
+computerScore = Label(root, text=0, font=100, bg= "black", fg="white")
 
-# create a function to handle the scissors button click
-def scissors():
-  global win_streak
-  win_streak = 0
-  computer = random.choice(["rock", "paper", "scissors"])
-  play("scissors", computer)
-  animate()
 
-# create a function to animate the buttons
-def animate():
-  # disable the buttons
-  rock_button.configure(state="disabled")
-  paper_button.configure(state="disabled")
-  scissors_button.configure(state="disabled")
-
-  # animate the buttons
-  for i in range(10):
-    window.update()
-    rock_button.pack_forget()
-    paper_button.pack_forget()
-    scissors_button.pack_forget()
-    window.update()
-    rock_button.pack()
-    paper_button.pack()
-    scissors_button.pack()
-
-  # enable the buttons
-  rock_button.configure(state="normal")
-  paper_button.configure(state="normal")
-  scissors_button.configure
+root.mainloop() 

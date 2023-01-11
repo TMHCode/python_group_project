@@ -57,7 +57,7 @@ def create_game(p_names: list):
     layout_ = create_connect_four_layout(COL_COUNT, ROW_COUNT, p_names)
 
     # Create the game window
-    window_ = sg.Window('Connect 4', layout_, size=(1100, 700), resizable=True, element_justification='center')
+    window_ = sg.Window('Connect 4 - PvP', layout_, size=(1100, 700), resizable=True, element_justification='center')
 
     # Game variables
     current_player_ = 0
@@ -71,6 +71,10 @@ def main(p_names: list):
 
     # Set the font size of the window
     sg.SetOptions(font=('Helvetica', 18))
+
+    # Set the player colors
+    p_background_colors = ['#6F3AFC', '#FCF060']
+    p_text_colors = ['#FFF7E2', '#2C2825']
 
     ## Setting up start variables
     grid, layout, window, current_player, round_number = create_game(p_names)
@@ -103,11 +107,11 @@ def main(p_names: list):
                 if grid[r][col] == ' ':
                     grid[r][col] = current_player
                     if current_player == 0:
-                        window[(r, col)].update(button_color=('white', '#6F3AFC'))
+                        window[(r, col)].update(button_color=('white', p_background_colors[0]))
                     else:
                         round_number += 1
                         window['round_number'].update(f'Round: {round_number}')
-                        window[(r, col)].update(button_color=('white', '#FCF060'))
+                        window[(r, col)].update(button_color=('white', p_background_colors[1]))
                     break
 
             # Check if the current player has won
@@ -133,7 +137,7 @@ def main(p_names: list):
                 current_player = 0
 
             # update the current player text
-            window['active_player'].update(f'Current Player: {p_names[current_player]}')
+            window['active_player'].update(f'Current Player: {p_names[current_player]}', background_color=p_background_colors[current_player], text_color=p_text_colors[current_player])
 
     ## Close the window
     window.close()

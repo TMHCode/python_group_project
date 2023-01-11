@@ -58,7 +58,7 @@ def create_game(p_names: list):
     layout_ = create_connect_four_layout(COL_COUNT, ROW_COUNT, p_names)
 
     # Create the game window
-    window_ = sg.Window('Connect 4', layout_, size=(1100, 700), resizable=True, element_justification='center')
+    window_ = sg.Window('Connect 4 - PvB', layout_, size=(1100, 700), resizable=True, element_justification='center')
 
     # Game variables
     current_player_ = 0

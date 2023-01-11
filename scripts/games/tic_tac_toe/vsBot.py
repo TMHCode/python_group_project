@@ -1,6 +1,9 @@
 import PySimpleGUI as sg
+import menu
+import random
 
-from scripts.layouts import create_tic_tac_toe_layout
+
+from layouts import create_tic_tac_toe_layout
 
 
 def check_win(player, board, window):
@@ -38,15 +41,22 @@ def new_field(player,board,window):
             board[row][col] = 0
             window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
+
 #????
-def bot_move(player, board, window, event):
-    for i in range(0, 3):
-        for j in range(0, 3):
-            if board[i][j] == 0:
-                board[i][j] = -player
-                player = -player
-            window[(i, j)].update("O" if player == 1 else "X",
-                                 button_color=("black", "#FC9E47" if player == 1 else "#B8F1FF"))
+def bot_move(board, window):
+    free_field= [[0 for _ in range(3)] for _ in range(3)]
+
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] != 0:
+                inner_field = free_field[row]
+                inner_field.remove(col)
+                print(free_field)
+    bot_row = random.choice(free_field)
+    bot_col = random.choice(random.choice(free_field))
+    window[bot_row,bot_col].update("O", button_color=("black", "#B8F1FF"))
+
+
 
 #random funkitoniert nicht ???
 
@@ -61,6 +71,7 @@ def main():
 
     # Create a list to store the state of the game
     board = [[0 for _ in range(3)] for _ in range(3)]
+    print(board)
 
     # Create a player
     player = 1
@@ -85,9 +96,12 @@ def main():
             if board[row][col] == 0:
                 board[row][col] = player
                 player = -player
-                bot_move(player, board, window, event)
-                window[event].update("O" if player == 1 else "X",
-                                     button_color=("black", "#FC9E47" if player == 1 else "#B8F1FF"))
+                print(event)
+                window[event].update("X", button_color=("black", "#FC9E47"))
+                bot_move(board, window)
+                player = -player
+
+
 
 
         # If the event is the "New Game" button, reset the board and switch players

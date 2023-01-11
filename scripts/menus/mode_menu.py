@@ -10,7 +10,7 @@ def main(game):
     layout = create_mode_menu_layout(game)
 
     # Create the window
-    window = sg.Window('Menu', layout, size=(1100, 700), resizable=True)
+    window = sg.Window('Game Mode Menu', layout, size=(1100, 700), resizable=True)
 
     # Loop to handle events
     while True:

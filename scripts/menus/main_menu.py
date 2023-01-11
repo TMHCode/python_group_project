@@ -1,9 +1,7 @@
 import PySimpleGUI as sg
 
-from scripts.games.connect_four import connect_four
-from scripts.games.tic_tac_toe import tic_tac_toe_1vs1
 from scripts.layouts import create_main_menu_layout
-from scripts.menus import mode_menu
+from scripts.menus import mode_menu, scoreboard_menu
 
 # Set the size of the window
 sg.SetOptions(font=('Helvetica', 20))
@@ -14,7 +12,7 @@ def main():
     layout = create_main_menu_layout()
 
     # Create the window
-    window = sg.Window('Menu', layout, size=(1100, 700), resizable=True)
+    window = sg.Window('Main Menu', layout, size=(1100, 700), resizable=True)
 
     # Loop to handle events
     while True:
@@ -30,9 +28,11 @@ def main():
             mode_menu.main(event)
             break
         elif event == 'Rock-Paper-Scissors':
-            pass
+            window.close()
+            mode_menu.main(event)
         elif event == 'Statistics':
-            pass
+            window.close()
+            scoreboard_menu.main()
 
     window.close()
 

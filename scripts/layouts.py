@@ -64,6 +64,22 @@ def create_pvb_name_menu_layout(game):
 # ----------
 
 
+# ----- LAYOUT for scoreboard_menu.py -----
+def create_scoreboard_menu_layout():
+    return [
+                [sg.VPush()],
+                [sg.Push(), sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
+                [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.VPush()],
+                [sg.Button('Back',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]
+
+    ]
+# ----------
+########################################
+
+
+########################################
+# GAME LAYOUTS
 # ----- LAYOUT for connect_four.py -----
 def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
     game_column = [
@@ -74,7 +90,7 @@ def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
     stats_column = [
         [sg.Push(background_color='#403731'), sg.Text('Game Info', font=('Helvetica', 20, 'bold'), background_color='#403731'), sg.Push(background_color='#403731')],
         [sg.HSeparator(color='#403731')],
-        [sg.Text(f'Current Player: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='active_player')],
+        [sg.Text(f'Current Player: {p_names[0]}', background_color='#6F3AFC', text_color='#FFF7E2', key='active_player')],
         [sg.HSeparator(color='#403731')],
         [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name'), sg.Text('COL', background_color='#6F3AFC', text_color='#6F3AFC')],
         [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2'), sg.Text('COL', background_color='#FCF060', text_color='#FCF060')],

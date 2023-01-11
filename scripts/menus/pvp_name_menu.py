@@ -12,7 +12,7 @@ def main(game):
     layout = create_pvp_name_menu_layout(game)
 
     # Create the window
-    window = sg.Window('Menu', layout, size=(1100, 700), resizable=True)
+    window = sg.Window('Name Menu', layout, size=(1100, 700), resizable=True)
 
     # Loop to handle events
     while True:
@@ -25,9 +25,9 @@ def main(game):
             window.close()
             if game == 'Connect Four':
                 connect_four.main([values['input_p1_name'], values['input_p2_name']])
-            elif game == 'Rock Paper Scissors':
+            elif game == 'Rock-Paper-Scissors':
                 pass
-            else:  # game == 'Tic Tac Toe'
+            elif game == 'Tic-Tac-Toe':
                 tic_tac_toe_1vs1.main()
             break
 

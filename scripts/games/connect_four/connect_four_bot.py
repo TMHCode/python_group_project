@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 import random
 
-import menu
-from layouts import create_connect_four_layout
+from scripts.menus import main_menu
+from scripts.layouts import create_connect_four_layout
 
 
 ## Game constants
@@ -78,10 +78,11 @@ def bot_turn(grid, window, cur_player):
     available_cols = list(range(0, COL_COUNT))
     for col in available_cols:
         if grid[0][col] != ' ':
+            print(grid[0][col])
             available_cols.remove(col)
     # determine a random column from the free columns
     bot_col = random.choice(available_cols)
-    print(bot_col)
+    print(available_cols, bot_col)
 
     for r in range(ROW_COUNT - 1, -1, -1):
         if grid[r][bot_col] == ' ':
@@ -113,7 +114,7 @@ def main():
 
             if event == 'Back':
                 window.close()
-                menu.main()
+                main_menu.main()
                 break
 
             if event == 'New Game':

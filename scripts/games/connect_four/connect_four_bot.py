@@ -98,7 +98,6 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int):
         available_cols = list(range(0, COL_COUNT))
         for col in available_cols:
             if grid[0][col] != ' ':
-                print(grid[0][col])
                 available_cols.remove(col)
         # determine a random column from the free columns
         bot_col = random.choice(available_cols)
@@ -106,6 +105,7 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int):
     for r in range(ROW_COUNT - 1, -1, -1):
         if grid[r][bot_col] == ' ':
             grid[r][bot_col] = cur_player
+            print('row:', r, 'col:', bot_col)
             window[(r, bot_col)].update(button_color=('white', '#FCF060'))
             break
     return grid, window

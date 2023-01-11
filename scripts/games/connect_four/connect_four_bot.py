@@ -62,7 +62,9 @@ def create_game(p_names: list):
 
     # Game variables
     current_player_ = 0
-    return grid_, layout_, window_, current_player_
+    round_number_ = 1
+
+    return grid_, layout_, window_, current_player_, round_number_
 
 
 def switch_player(cur_player: int):
@@ -99,7 +101,7 @@ def main(p_names: list):
     sg.SetOptions(font=('Helvetica', 18))
 
     ## Setting up start variables
-    grid, layout, window, current_player = create_game(p_names)
+    grid, layout, window, current_player, round_number = create_game(p_names)
 
     ## Game loop
     while True:
@@ -120,7 +122,7 @@ def main(p_names: list):
             if event == 'New Game':
                 # create a new clean game board
                 window.close()
-                grid, layout, window, current_player = create_game()
+                grid, layout, window, current_player, round_number = create_game()
                 continue
 
             # Get the row and column of the button clicked
@@ -131,15 +133,17 @@ def main(p_names: list):
                 for r in range(ROW_COUNT - 1, -1, -1):
                     if grid[r][col] == ' ':
                         grid[r][col] = current_player
+                        round_number += 1
+                        window['round_number'].update(f'Round: {round_number}')
                         window[(r, col)].update(button_color=('white', '#6F3AFC'))
                         break
 
         # Check if the current player has won
         if check_win(grid, current_player):
-            sg.popup('Player ' + current_player + ' wins!')
+            sg.popup('Player ' + str(current_player + 1) + ' wins!')
             # create a new clean game board
             window.close()
-            grid, layout, window, current_player = create_game()
+            grid, layout, window, current_player, round_number = create_game(p_names)
             continue
 
         # Check if the board is full
@@ -147,7 +151,7 @@ def main(p_names: list):
             sg.popup('The board is full!')
             # create a new clean game board
             window.close()
-            grid, layout, window, current_player = create_game()
+            grid, layout, window, current_player, round_number = create_game(p_names)
             continue
 
         current_player = switch_player(current_player)

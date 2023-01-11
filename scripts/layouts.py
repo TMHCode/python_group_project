@@ -74,10 +74,12 @@ def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
     stats_column = [
         [sg.Push(background_color='#403731'), sg.Text('Game Info', font=('Helvetica', 20, 'bold'), background_color='#403731'), sg.Push(background_color='#403731')],
         [sg.HSeparator(color='#403731')],
+        [sg.Text(f'Current Player: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='active_player')],
+        [sg.HSeparator(color='#403731')],
         [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name'), sg.Text('COL', background_color='#6F3AFC', text_color='#6F3AFC')],
         [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2'), sg.Text('COL', background_color='#FCF060', text_color='#FCF060')],
         [sg.HSeparator(color='#403731')],
-        [sg.Text('Rounds played: <number>', background_color='#403731', text_color='#FFF7E2')]
+        [sg.Text('Round: 1', background_color='#403731', text_color='#FFF7E2', key='round_number')]
     ]
 
     return [

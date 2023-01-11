@@ -82,18 +82,6 @@ def bot_move(player, board, window):
             break
 
 
-"""
-def bot_move(player, board, window):
-    while True:
-        row = randrange(3)
-        col = randrange(3)
-        if board[row][col] == 0:
-            board[row][col] = -player
-            window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
-            break
-"""
-
-
 def main():
 
     sg.ChangeLookAndFeel("DarkAmber")

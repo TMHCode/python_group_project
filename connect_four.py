@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import menu
+from menus import menu_main
 
 from layouts import create_connect_four_layout
 
@@ -82,7 +82,7 @@ def main():
 
         if event == 'Back':
             window.close()
-            menu.main()
+            menu_main.main()
             break
 
         if event == 'New Game':

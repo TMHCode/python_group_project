@@ -1,7 +1,4 @@
 import PySimpleGUI as sg
-import menu
-from random import randrange
-import time
 
 from layouts import create_tic_tac_toe_layout
 

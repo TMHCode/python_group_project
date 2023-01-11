@@ -6,7 +6,7 @@ sg.ChangeLookAndFeel('DarkAmber')  # Add a touch of color
 
 # --- Create all the different Layouts for the window here ---
 
-# ----- LAYOUT for menu.py -----
+# ----- LAYOUT for menu_main.py -----
 def create_menu_layout():
     return [
                 [sg.VPush()],

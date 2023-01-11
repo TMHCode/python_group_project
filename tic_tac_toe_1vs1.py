@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-import menu
 
+from menus import menu_main
 from layouts import create_tic_tac_toe_layout
 
 
@@ -66,7 +66,7 @@ def main():
 
         if event == 'Back':
             window.close()
-            menu.main()
+            menu_main.main()
             break
 
         # If the event is a button press, update the board and switch players

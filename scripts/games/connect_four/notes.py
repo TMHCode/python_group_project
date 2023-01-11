@@ -96,3 +96,8 @@ class ConnectFour:
 game = ConnectFour()
 game.bot_play()
 
+
+
+
+['name', 'ttt', 0, 0, 1]
+['name', 'ttt', 0, 1, 0]

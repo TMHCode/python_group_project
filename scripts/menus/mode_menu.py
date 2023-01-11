@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
-from scripts.games.connect_four import connect_four, connect_four_bot
-from scripts.games.tic_tac_toe import tic_tac_toe_1vs1
+from scripts.menus import pvp_name_menu, pvb_name_menu
 from scripts.layouts import create_mode_menu_layout
+from scripts.menus import main_menu
 
 
 def main(game):
@@ -16,24 +16,16 @@ def main(game):
     while True:
         event, values = window.read()
         if event in (sg.WIN_CLOSED, 'Back'):
+            window.close()
+            main_menu.main()
             break
         elif event == 'Player vs. Player':
             window.close()
-            if game == 'Connect Four':
-                connect_four.main()
-            elif game == 'Rock Paper Scissors':
-                pass
-            else:           # game == 'Tic Tac Toe'
-                tic_tac_toe_1vs1.main()
+            pvp_name_menu.main(game)
             break
         elif event == 'Player vs. Bot':
             window.close()
-            if game == 'Connect Four':
-                connect_four_bot.main()
-            elif game == 'Rock Paper Scissors':
-                pass
-            else:           # game == 'Tic Tac Toe'
-                pass
+            pvb_name_menu.main(game)
             break
 
     window.close()

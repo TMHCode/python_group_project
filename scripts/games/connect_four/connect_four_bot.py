@@ -12,7 +12,7 @@ COL_COUNT = 7
 
 ## Functions
 # function for checking win conditions
-def check_win(grid, player):
+def check_win(grid: list, player: int):
     # Check horizontal win
     for r in range(ROW_COUNT):
         for c in range(COL_COUNT - 3):
@@ -41,7 +41,7 @@ def check_win(grid, player):
 
 
 # function for checking if the board is full (draw)
-def check_full(grid):
+def check_full(grid: list):
     for r in range(ROW_COUNT):
         for c in range(COL_COUNT):
             if grid[r][c] == ' ':
@@ -50,30 +50,30 @@ def check_full(grid):
 
 
 # function that creates a new clean game board
-def create_game():
+def create_game(p_names: list):
     # Create the game grid
     grid_ = [[' ' for _ in range(COL_COUNT)] for _ in range(ROW_COUNT)]
 
     # Create the layout for the game window
-    layout_ = create_connect_four_layout(COL_COUNT, ROW_COUNT)
+    layout_ = create_connect_four_layout(COL_COUNT, ROW_COUNT, p_names)
 
     # Create the game window
     window_ = sg.Window('Connect 4', layout_, size=(1100, 700), resizable=True, element_justification='center')
 
     # Game variables
-    current_player_ = 'P1'
+    current_player_ = 0
     return grid_, layout_, window_, current_player_
 
 
-def switch_player(cur_player):
+def switch_player(cur_player: int):
     # Toggle the current player
-    if cur_player == 'P1':
-        return 'P2'
+    if cur_player == 0:
+        return 1
     else:
-        return 'P1'
+        return 0
 
 
-def bot_turn(grid, window, cur_player):
+def bot_turn(grid: list, window: sg.Window, cur_player: int):
     # check what columns still have an empty space
     available_cols = list(range(0, COL_COUNT))
     for col in available_cols:
@@ -93,18 +93,18 @@ def bot_turn(grid, window, cur_player):
 
 
 # main function
-def main():
+def main(p_names: list):
 
     # Set the font size of the window
     sg.SetOptions(font=('Helvetica', 18))
 
     ## Setting up start variables
-    grid, layout, window, current_player = create_game()
+    grid, layout, window, current_player = create_game(p_names)
 
     ## Game loop
     while True:
         # Check if BOT turn
-        if current_player == 'P2':
+        if current_player == 1:
             grid, window = bot_turn(grid, window, current_player)
         else:
             # Get the button click event
@@ -155,6 +155,3 @@ def main():
     ## Close the window
     window.close()
 
-
-if __name__ == '__main__':
-    main()

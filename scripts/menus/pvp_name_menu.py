@@ -24,7 +24,7 @@ def main(game):
         elif event == 'Continue':
             window.close()
             if game == 'Connect Four':
-                connect_four.main()
+                connect_four.main([values['input_p1_name'], values['input_p2_name']])
             elif game == 'Rock Paper Scissors':
                 pass
             else:  # game == 'Tic Tac Toe'

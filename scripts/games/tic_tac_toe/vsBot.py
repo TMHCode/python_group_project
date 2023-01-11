@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-from layouts import create_tic_tac_toe_layout
+from scripts.layouts import create_tic_tac_toe_layout
 
 
 def check_win(player, board, window):

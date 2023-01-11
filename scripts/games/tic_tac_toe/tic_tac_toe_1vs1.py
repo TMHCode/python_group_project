@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
-from menus import menu_main
-from layouts import create_tic_tac_toe_layout
+from scripts.menus import menu_main
+from scripts.layouts import create_tic_tac_toe_layout
 
 
 def check_win(player, board, window):

@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
-import connect_four
-import tic_tac_toe_1vs1
 
-from layouts import create_menu_layout
+from scripts.games.connect_four import connect_four
+from scripts.games.tic_tac_toe import tic_tac_toe_1vs1
+from scripts.layouts import create_menu_layout
 
 # Set the size of the window
 sg.SetOptions(font=('Helvetica', 20))

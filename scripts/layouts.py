@@ -7,7 +7,7 @@ sg.ChangeLookAndFeel('DarkAmber')  # Add a touch of color
 # --- Create all the different Layouts for the window here ---
 
 # ----- LAYOUT for main_menu.py -----
-def create_menu_layout():
+def create_main_menu_layout():
     return [
                 [sg.VPush()],
                 [sg.Push(), sg.Text('Main Menu', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
@@ -17,6 +17,49 @@ def create_menu_layout():
                 [sg.Push(), sg.Button('Statistics', size=(16, 2), border_width=10, font=('Helvetica', 18), button_color=('black', '#FC9E47'), pad=(10, 20)), sg.Push()],
                 [sg.VPush()],
                 [sg.Button('Quit',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]
+    ]
+# ----------
+
+
+# ----- LAYOUT for mode_menu.py -----
+def create_mode_menu_layout(game):
+    return [
+                [sg.VPush()],
+                [sg.Push(), sg.Text(f'Mode Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
+                [sg.Push(), sg.Text('Chose your game-mode!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.Push(), sg.Button('Player vs. Player', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.Push(), sg.Button('Player vs. Bot', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.VPush()],
+                [sg.Button('Back',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]
+    ]
+# ----------
+
+
+# ----- LAYOUT for pvp_name_menu.py -----
+def create_pvp_name_menu_layout(game):
+    return [
+                [sg.VPush()],
+                [sg.Push(), sg.Text(f'Name Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
+                [sg.Push(), sg.Text('Enter your names!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.Push(), sg.Text('Player 1:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.InputText('name player 1'), sg.Push()],
+                [sg.Push(), sg.Text('Player 2:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.InputText('name player 2'), sg.Push()],
+                [sg.Push(), sg.Button('Continue', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.VPush()],
+                [sg.Button('Back',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]
+    ]
+# ----------
+
+
+# ----- LAYOUT for pvb_name_menu.py -----
+def create_pvb_name_menu_layout(game):
+    return [
+                [sg.VPush()],
+                [sg.Push(), sg.Text(f'Name Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2', justification='center'), sg.Push()],
+                [sg.Push(), sg.Text('Enter your name!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.Push(), sg.Text('Player:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.InputText('name player'), sg.Push()],
+                [sg.Push(), sg.Button('Continue', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+                [sg.VPush()],
+                [sg.Button('Back',  size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'), pad=(0, 0))]
     ]
 # ----------
 

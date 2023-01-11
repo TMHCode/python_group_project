@@ -76,15 +76,32 @@ def switch_player(cur_player: int):
 
 
 def bot_turn(grid: list, window: sg.Window, cur_player: int):
-    # check what columns still have an empty space
-    available_cols = list(range(0, COL_COUNT))
-    for col in available_cols:
-        if grid[0][col] != ' ':
-            print(grid[0][col])
-            available_cols.remove(col)
-    # determine a random column from the free columns
-    bot_col = random.choice(available_cols)
-    print(available_cols, bot_col)
+    bot_col = -1
+    ## preventing player from winning
+    for col in range(COL_COUNT):
+        if grid[0][col] == ' ':
+            for r in range(ROW_COUNT - 1, -1, -1):
+                if grid[r][col] == ' ':
+                    grid[r][col] = 0
+                    if check_win(grid, 0):
+                        grid[r][col] = ' '
+                        bot_col = col
+                        break
+                    grid[r][col] = ' '
+                    break
+            if bot_col != -1:
+                break
+
+    ## random cell placement if bot_col is not already determined
+    if bot_col == -1:
+        # check what columns still have an empty space
+        available_cols = list(range(0, COL_COUNT))
+        for col in available_cols:
+            if grid[0][col] != ' ':
+                print(grid[0][col])
+                available_cols.remove(col)
+        # determine a random column from the free columns
+        bot_col = random.choice(available_cols)
 
     for r in range(ROW_COUNT - 1, -1, -1):
         if grid[r][bot_col] == ' ':
@@ -122,7 +139,7 @@ def main(p_names: list):
             if event == 'New Game':
                 # create a new clean game board
                 window.close()
-                grid, layout, window, current_player, round_number = create_game()
+                grid, layout, window, current_player, round_number = create_game(p_names)
                 continue
 
             # Get the row and column of the button clicked

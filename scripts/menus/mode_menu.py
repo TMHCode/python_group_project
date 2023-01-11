@@ -16,6 +16,7 @@ def main(game):
     while True:
         event, values = window.read()
         if event in (sg.WIN_CLOSED, 'Back'):
+
             window.close()
             main_menu.main()
             break

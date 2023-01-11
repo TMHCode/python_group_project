@@ -1,5 +1,7 @@
 import PySimpleGUI as sg
+from random import randrange
 
+from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
 
 
@@ -38,17 +40,16 @@ def new_field(player,board,window):
             board[row][col] = 0
             window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
-#????
-def bot_move(player, board, window, event):
-    for i in range(0, 3):
-        for j in range(0, 3):
-            if board[i][j] == 0:
-                board[i][j] = -player
-                player = -player
-            window[(i, j)].update("O" if player == 1 else "X",
-                                 button_color=("black", "#FC9E47" if player == 1 else "#B8F1FF"))
 
-#random funkitoniert nicht ???
+def bot_move(player, board, window):
+    while True:
+        row = randrange(3)
+        col = randrange(3)
+        if board[row][col] == 0:
+            board[row][col] = player
+            window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
+            break
+
 
 def main():
 
@@ -61,6 +62,7 @@ def main():
 
     # Create a list to store the state of the game
     board = [[0 for _ in range(3)] for _ in range(3)]
+    print(board)
 
     # Create a player
     player = 1
@@ -76,7 +78,7 @@ def main():
 
         if event == 'Back':
             window.close()
-            menu.main()
+            main_menu.main()
             break
 
         # If the event is a button press, update the board and switch players
@@ -85,9 +87,13 @@ def main():
             if board[row][col] == 0:
                 board[row][col] = player
                 player = -player
-                bot_move(player, board, window, event)
-                window[event].update("O" if player == 1 else "X",
-                                     button_color=("black", "#FC9E47" if player == 1 else "#B8F1FF"))
+                print(event)
+                window[event].update("X", button_color=("black", "#FC9E47"))
+                if not check_draw(board):
+                    bot_move(player, board, window)
+                player = -player
+
+
 
 
         # If the event is the "New Game" button, reset the board and switch players

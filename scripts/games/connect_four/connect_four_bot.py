@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import random
 
-from scripts.menus import menu_main
+from scripts.menus import main_menu
 from scripts.layouts import create_connect_four_layout
 
 
@@ -114,7 +114,7 @@ def main():
 
             if event == 'Back':
                 window.close()
-                menu_main.main()
+                main_menu.main()
                 break
 
             if event == 'New Game':

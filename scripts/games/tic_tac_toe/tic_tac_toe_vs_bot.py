@@ -1,29 +1,35 @@
 import PySimpleGUI as sg
 from random import randrange
 
+
 from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
 
 
-def check_win(player, board, window):
-    for row in range(3):
-        if board[row][0] == board[row][1] == board[row][2] and board[row][0] != 0:
-            sg.popup(f"Player {'X' if board[row][0] == 1 else 'O'} has won!")
-            new_field(player, board, window)
+def check_win_player(board):
+    if (board[0][0] == 1 and board[0][1] == 1 and board[0][2] == 1) or \
+            (board[1][0] == 1 and board[1][1] == 1 and board[1][2] == 1) or \
+            (board[2][0] == 1 and board[2][1] == 1 and board[2][2] == 1) or \
+            (board[0][0] == 1 and board[1][0] == 1 and board[2][0] == 1) or \
+            (board[0][1] == 1 and board[1][1] == 1 and board[2][1] == 1) or \
+            (board[0][2] == 1 and board[1][2] == 1 and board[2][2] == 1) or \
+            (board[0][0] == 1 and board[1][1] == 1 and board[2][2] == 1) or \
+            (board[0][2] == 1 and board[1][1] == 1 and board[2][0] == 1):
+        return True
+    return False
 
-    for col in range(3):
-        if board[0][col] == board[1][col] == board[2][col] and board[0][col] != 0:
-            sg.popup(f"Player {'X' if board[0][col] == 1 else 'O'} has won!")
-            new_field(player, board, window)
 
-    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != 0:
-        sg.popup(f"Player {'X' if board[0][0] == 1 else 'O'} has won!")
-        new_field(player, board, window)
-
-    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != 0:
-        sg.popup(f"Player {'X' if board[0][2] == 1 else 'O'} has won!")
-        new_field(player, board, window)
-
+def check_win_bot(board):
+    if (board[0][0] == -1 and board[0][1] == -1 and board[0][2] == -1) or \
+            (board[1][0] == -1 and board[1][1] == -1 and board[1][2] == -1) or \
+            (board[2][0] == -1 and board[2][1] == -1 and board[2][2] == -1) or \
+            (board[0][0] == -1 and board[1][0] == -1 and board[2][0] == -1) or \
+            (board[0][1] == -1 and board[1][1] == -1 and board[2][1] == -1) or \
+            (board[0][2] == -1 and board[1][2] == -1 and board[2][2] == -1) or \
+            (board[0][0] == -1 and board[1][1] == -1 and board[2][2] == -1) or \
+            (board[0][2] == -1 and board[1][1] == -1 and board[2][0] == -1):
+        return True
+    return False
 
 def check_draw(board):
     for i in range(3):
@@ -42,13 +48,50 @@ def new_field(player,board,window):
 
 
 def bot_move(player, board, window):
+    # Check for potential winning moves for the bot
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == 0:
+                board[row][col] = -player
+                if check_win_bot(board):
+                    # Make the winning move
+                    window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
+                    return
+                else:
+                    board[row][col] = 0
+
+    # check for potential winning moves for the player and block it
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == 0:
+                board[row][col] = player
+                if check_win_player(board):
+                    # Block the potential winning move for the player by making the same move for the bot
+                    board[row][col] = -player
+                    window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
+                    return
+                else:
+                    board[row][col] = 0
+    # If there is no potential winning move for the bot, make a random move
     while True:
         row = randrange(3)
         col = randrange(3)
         if board[row][col] == 0:
-            board[row][col] = player
+            board[row][col] = -player
             window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
             break
+
+
+"""
+def bot_move(player, board, window):
+    while True:
+        row = randrange(3)
+        col = randrange(3)
+        if board[row][col] == 0:
+            board[row][col] = -player
+            window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
+            break
+"""
 
 
 def main():
@@ -62,7 +105,7 @@ def main():
 
     # Create a list to store the state of the game
     board = [[0 for _ in range(3)] for _ in range(3)]
-    print(board)
+    #print(board)
 
     # Create a player
     player = 1
@@ -86,12 +129,21 @@ def main():
             row, col = event
             if board[row][col] == 0:
                 board[row][col] = player
-                player = -player
-                print(event)
+                #print(board[row][col])
                 window[event].update("X", button_color=("black", "#FC9E47"))
+                if check_win_player(board):
+                    sg.popup(f"Player 'X' has won!")
+                    new_field(player, board, window)
+                    continue
                 if not check_draw(board):
                     bot_move(player, board, window)
-                player = -player
+                    if check_win_bot(board):
+                        sg.popup(f"Player 'O' has won!")
+                        new_field(player, board, window)
+
+
+
+
 
 
 
@@ -102,7 +154,8 @@ def main():
 
 
         #Check if someone has won the game
-        check_win(player, board, window)
+
+
         if check_draw(board):
             sg.popup(f"Draw")
             new_field(player, board, window)

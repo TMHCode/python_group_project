@@ -24,7 +24,7 @@ def main(game):
         elif event == 'Continue':
             window.close()
             if game == 'Connect Four':
-                connect_four_bot.main()
+                connect_four_bot.main([values['input_player_name'], 'Bot'])
             elif game == 'Rock Paper Scissors':
                 pass
             else:  # game == 'Tic Tac Toe'

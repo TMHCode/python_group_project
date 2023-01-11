@@ -1,9 +1,8 @@
 import PySimpleGUI as sg
-import menu
-import random
+from random import randrange
 
-
-from layouts import create_tic_tac_toe_layout
+from scripts.menus import main_menu
+from scripts.layouts import create_tic_tac_toe_layout
 
 
 def check_win(player, board, window):
@@ -42,23 +41,15 @@ def new_field(player,board,window):
             window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
 
-#????
-def bot_move(board, window):
-    free_field= [[0 for _ in range(3)] for _ in range(3)]
+def bot_move(player, board, window):
+    while True:
+        row = randrange(3)
+        col = randrange(3)
+        if board[row][col] == 0:
+            board[row][col] = player
+            window[(row, col)].update("O", button_color=("black", "#B8F1FF"))
+            break
 
-    for row in range(3):
-        for col in range(3):
-            if board[row][col] != 0:
-                inner_field = free_field[row]
-                inner_field.remove(col)
-                print(free_field)
-    bot_row = random.choice(free_field)
-    bot_col = random.choice(random.choice(free_field))
-    window[bot_row,bot_col].update("O", button_color=("black", "#B8F1FF"))
-
-
-
-#random funkitoniert nicht ???
 
 def main():
 
@@ -87,7 +78,7 @@ def main():
 
         if event == 'Back':
             window.close()
-            menu.main()
+            main_menu.main()
             break
 
         # If the event is a button press, update the board and switch players
@@ -98,7 +89,8 @@ def main():
                 player = -player
                 print(event)
                 window[event].update("X", button_color=("black", "#FC9E47"))
-                bot_move(board, window)
+                if not check_draw(board):
+                    bot_move(player, board, window)
                 player = -player
 
 

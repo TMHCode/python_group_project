@@ -4,8 +4,8 @@ import pickle
 
 
 # Save the player's name and score to a file
-def save_data(name1, name2, score):
-    data = {'name1': name1, 'name2': name2, 'score': score}
+def save_data(name, score):
+    data = {'name': name, 'score': score}
     with open("data.pkl", "wb") as file:
         pickle.dump(data, file)
 
@@ -19,13 +19,9 @@ def load_data():
 def main():
     sg.theme('DarkAmber')
 
-    player1_name = ''
-    player2_name = ''
-
-    layout = [[sg.Text('Enter player 1 name:')],
-              [sg.InputText(key='-NAME1-')],
-              [sg.Text('Enter player 2 name:')],
-              [sg.InputText(key='-NAME2-')],
+    player_name = ''
+    layout = [[sg.Text('Enter your name:')],
+              [sg.InputText(key='-NAME-')],
               [sg.Button('Start'), sg.Button('Quit')]]
 
     window = sg.Window('Rock-Paper-Scissors', layout)
@@ -35,8 +31,7 @@ def main():
         if event in (None, 'Quit'):
             break
         elif event == 'Start':
-            player1_name = values['-NAME1-']
-            player2_name = values['-NAME2-']
+            player_name = values['-NAME-']
             window.close()
             break
 
@@ -45,22 +40,17 @@ def main():
     scissors_img = "scissor.png"
 
     layout = [[sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
-              [sg.Button('', image_filename=rock_img, button_color="white", key="Rock1", image_subsample=2),
-               sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper1", image_subsample=2),
-               sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors1",
-                         image_subsample=2)],
-              [sg.Button('', image_filename=rock_img, button_color="white", key="Rock2", image_subsample=2),
-               sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper2", image_subsample=2),
-               sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors2",
+              [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2),
+               sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2),
+               sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors",
                          image_subsample=2)],
               [sg.Text('', key='-OUTCOME-')],
-              [sg.Text('{}: {} wins, {} losses, {} ties'.format(player1_name, *player1_score), key='-SCORE1-'),
-               sg.Text('{}: {} wins, {} losses, {} ties'.format(player2_name, *player2_score), key='-SCORE2-')],
+              [sg.Text('Score: 0 wins, 0 losses, 0 ties', key='-SCORE-', font=("Arial", 20))],
               [sg.Button('New', size=(10, 10), font=("Arial", 20)),
                sg.Button('Safe', size=(10, 10), font=("Arial", 20)),
                sg.Button('Quit', size=(10, 10), font=("Arial", 20))]]
 
-    window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 800), resizable=True, element_justification='center')
+    window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 500), resizable=True, element_justification='center')
     score = {'wins': 0, 'losses': 0, 'ties': 0}
     score_text = window['-SCORE-']
 
@@ -69,7 +59,7 @@ def main():
         if event in (None, 'Quit'):
             break
         elif event in (None, 'Safe'):
-            save_data(player1_name, player2_name, score)
+            save_data(player_name, score)
             loaded_data = load_data()
             sg.popup(loaded_data)  # (0, 0, 0)
             break

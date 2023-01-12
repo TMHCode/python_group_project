@@ -49,9 +49,9 @@ def button_click(choice):
 # Create the main window
 window = sg.Window("Rock-Paper-Scissors", layout=[
     [sg.Text("Make your choice:", font=("Helvetica", 16), text_color="yellow")],
-    [sg.Button("Rock [r]", button_color=("white", "black"), key="rock"),
-     sg.Button("Paper [p]", button_color=("white", "black"), key="paper"),
-     sg.Button("Scissors [s]", button_color=("white", "black"), key="scissors")],
+    [sg.Button("Rock", button_color=("white", "black"), key="rock"),
+     sg.Button("Paper", button_color=("white", "black"), key="paper"),
+     sg.Button("Scissors", button_color=("white", "black"), key="scissors")],
     [sg.Text("Player's choice:", font=("Helvetica", 14), text_color="yellow"),
      sg.Text("", size=(20, 1), key="player_choice", font=("Helvetica", 14), text_color="red")],
     [sg.Text("Computer's choice:", font=("Helvetica", 14), text_color="yellow"),

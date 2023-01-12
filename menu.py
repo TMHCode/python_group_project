@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 import connect_four
-
+import PVB
 from layouts import create_menu_layout
 
 # Set the size of the window
@@ -22,6 +22,10 @@ def main():
         elif event == 'Connect Four':
             window.close()
             connect_four.main()
+            break
+        elif event == 'Rock-Paper-Scissor':
+            window.close()
+            #PVB.main()
             break
 
     window.close()

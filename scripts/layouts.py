@@ -207,5 +207,4 @@ def create_RPS_layout(p_names: list):
             [sg.Text('', key='-OUTCOME-')],
             [sg.Text('Score: 0 wins, 0 losses, 0 ties', key='-SCORE-', font=("Arial", 20))],
             [sg.Button('New', size=(10, 10), font=("Arial", 20)),
-             sg.Button('Safe', size=(10, 10), font=("Arial", 20)),
              sg.Button('Quit', size=(10, 10), font=("Arial", 20))]]

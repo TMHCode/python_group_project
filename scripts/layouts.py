@@ -110,14 +110,40 @@ def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
 
 
 # ----- LAYOUT for tic_tac_toe.py -----
-def create_tic_tac_toe_layout():
-
-    return[
-        [[sg.Text("Tic-Tac-Toe", font=("Helvetica", 20))],
-         [[sg.Button(" ", size=(5, 2), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
+def create_tic_tac_toe_layout(p_names: list):
+    game_column = [
+         *[[sg.Button(" ", size=(5, 2), pad=(0, 0), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
           for j in range(3)],
-         [sg.Button("Back", size=(8, 2), border_width=8, button_color=('black', '#B8F1FF')),
-          sg.Button("New Game", size=(14, 2), border_width=10)]]
+           [sg.Button('Back', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8),
+            sg.Button('New Game', size=(14, 2), pad=(50, 15), border_width=10)]
+    ]
 
+
+
+    stats_column = [
+        [sg.Push(background_color='#403731'),
+         sg.Text('Game Info', font=('Helvetica', 20, 'bold'), background_color='#403731'),
+         sg.Push(background_color='#403731')],
+        [sg.HSeparator(color='#403731')],
+        [sg.Text(f'Current Player: {p_names[0]}', background_color="#B8F1FF", text_color='black',
+                 key='active_player')],
+        [sg.HSeparator(color='#403731')],
+        [sg.Text(f'Player 1: {p_names[0]} ', background_color='#403731', text_color='#FFF7E2', key='p1_name'),
+         sg.Text(' X ', size=(2, 0), background_color="#B8F1FF", text_color="black")],
+        [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2'),
+         sg.Text(' O ', size=(2, 0), background_color="#FC9E47", text_color="black")],
+        [sg.HSeparator(color='#403731')],
+        [sg.Text('Round: 1', background_color='#403731', text_color='#FFF7E2', key='round_number')]
+    ]
+
+    return [
+        [sg.VPush()],
+        [sg.Push(),
+            sg.Text('Tic-Tac-Toe', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+                 justification='center'), sg.Push()],
+        [sg.Push(), sg.Column(game_column),
+            sg.VSeparator(color='#403731'),
+            sg.Col(stats_column, background_color='#403731', pad=(30, 0)), sg.Push()],
+        [sg.VPush()]
     ]
 # ----------

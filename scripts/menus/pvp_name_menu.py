@@ -7,7 +7,6 @@ from scripts.menus import main_menu
 from scripts.layouts import create_pvp_name_menu_layout
 
 
-
 def main(game):
 
     # Create the layout

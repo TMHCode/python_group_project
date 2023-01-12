@@ -105,10 +105,10 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int):
     for r in range(ROW_COUNT - 1, -1, -1):
         if grid[r][bot_col] == ' ':
             grid[r][bot_col] = cur_player
-            print('row:', r, 'col:', bot_col)
+            valid_turn = True
             window[(r, bot_col)].update(button_color=('white', '#FCF060'))
             break
-    return grid, window
+    return grid, window, valid_turn
 
 
 # main function
@@ -122,9 +122,10 @@ def main(p_names: list):
 
     ## Game loop
     while True:
+        valid_turn = False  # bool to check if a turn was actually made (used for the switch player check)
         # Check if BOT turn
         if current_player == 1:
-            grid, window = bot_turn(grid, window, current_player)
+            grid, window, valid_turn = bot_turn(grid, window, current_player)
         else:
             # Get the button click event
             event, values = window.read()
@@ -153,6 +154,7 @@ def main(p_names: list):
                         round_number += 1
                         window['round_number'].update(f'Round: {round_number}')
                         window[(r, col)].update(button_color=('white', '#6F3AFC'))
+                        valid_turn = True
                         break
 
         # Check if the current player has won
@@ -171,7 +173,8 @@ def main(p_names: list):
             grid, layout, window, current_player, round_number = create_game(p_names)
             continue
 
-        current_player = switch_player(current_player)
+        if valid_turn:
+            current_player = switch_player(current_player)
 
     ## Close the window
     window.close()

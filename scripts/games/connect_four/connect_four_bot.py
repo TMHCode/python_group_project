@@ -108,6 +108,7 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int):
             valid_turn = True
             window[(r, bot_col)].update(button_color=('white', '#FCF060'))
             break
+
     return grid, window, valid_turn
 
 
@@ -159,19 +160,42 @@ def main(p_names: list):
 
         # Check if the current player has won
         if check_win(grid, current_player):
-            sg.popup('Player ' + str(current_player + 1) + ' wins!')
-            # create a new clean game board
-            window.close()
-            grid, layout, window, current_player, round_number = create_game(p_names)
-            continue
+            if current_player == 0:
+                choice, _ = sg.Window('Game End', [[sg.T(p_names[0] + ' wins!', font=('Helvetica', 30, 'bold'), pad=(0, 5), justification='center', text_color='#6F3AFC')], [sg.T('Do you want to play again?', font=('Helvetica', 15), pad=(0, 30), justification='center', text_color="#FFF7E2")], [sg.No(s=10, button_color=('black', '#B8F1FF')), sg.Yes(s=10, button_color=('black', '#FC9E47'))]], disable_close=True).read(close=True)
+            else:
+                choice, _ = sg.Window('Game End', [[sg.T('Bot wins!', font=('Helvetica', 30, 'bold'), pad=(0, 5), justification='center', text_color='#FCF060')], [sg.T('Do you want to play again?', font=('Helvetica', 15), pad=(0, 30), justification='center', text_color="#FFF7E2")], [sg.No(s=10, button_color=('black', '#B8F1FF')), sg.Yes(s=10, button_color=('black', '#FC9E47'))]], disable_close=True).read(close=True)
+            # Pop-Up choice 'No'
+            if choice == 'No':
+                # go back to the main menu
+                window.close()
+                main_menu.main()
+                break
+            else:
+                # create a new clean game board
+                window.close()
+                grid, layout, window, current_player, round_number = create_game(p_names)
+                continue
 
         # Check if the board is full
         if check_full(grid):
-            sg.popup('The board is full!')
-            # create a new clean game board
-            window.close()
-            grid, layout, window, current_player, round_number = create_game(p_names)
-            continue
+            choice, _ = sg.Window('Game End', [[sg.T('Draw!', font=('Helvetica', 30, 'bold'), pad=(0, 5),
+                                                     justification='center', text_color='#FC9E47')], [
+                                                   sg.T('The board is full.', font=('Helvetica', 15),
+                                                        pad=(0, 30), justification='center', text_color="#FFF7E2")],
+                                               [sg.No(s=10, button_color=('black', '#B8F1FF')),
+                                                sg.Yes(s=10, button_color=('black', '#FC9E47'))]],
+                                  disable_close=True).read(close=True)
+            # Pop-Up choice 'No'
+            if choice == 'No':
+                # go back to the main menu
+                window.close()
+                main_menu.main()
+                break
+            else:
+                # create a new clean game board
+                window.close()
+                grid, layout, window, current_player, round_number = create_game(p_names)
+                continue
 
         if valid_turn:
             current_player = switch_player(current_player)

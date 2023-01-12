@@ -102,3 +102,4 @@ game.bot_play()
 [['name', 'ttt', 'win'],
 ['name', 'ttt', 'lose'],
 ['name', 'ttt', 'draw']]
+

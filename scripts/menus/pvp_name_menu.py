@@ -28,7 +28,7 @@ def main(game):
             elif game == 'Rock-Paper-Scissors':
                 pass
             elif game == 'Tic-Tac-Toe':
-                tic_tac_toe_1vs1.main()
+                tic_tac_toe_1vs1.main([values['input_p1_name'], values['input_p2_name']])
             break
 
     window.close()

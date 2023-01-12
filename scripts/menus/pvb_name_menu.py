@@ -28,7 +28,7 @@ def main(game):
             elif game == 'Rock-Paper-Scissors':
                 pass
             elif game == 'Tic-Tac-Toe':
-                tic_tac_toe_vs_bot.main()
+                tic_tac_toe_vs_bot.main(([values['input_player_name'], 'Bot']))
                 pass
             break
 

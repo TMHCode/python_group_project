@@ -4,25 +4,43 @@ from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
 
 
-def check_win(player, board, window):
-    for row in range(3):
-        if board[row][0] == board[row][1] == board[row][2] and board[row][0] != 0:
-            sg.popup(f"Player {'X' if board[row][0] == 1 else 'O'} has won!")
-            new_field(player, board, window)
+def create_game(p_names: list):
+    # Create the layout of the game
+    layout = create_tic_tac_toe_layout(p_names)
 
-    for col in range(3):
-        if board[0][col] == board[1][col] == board[2][col] and board[0][col] != 0:
-            sg.popup(f"Player {'X' if board[0][col] == 1 else 'O'} has won!")
-            new_field(player, board, window)
+    # Create the window
+    window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True, element_justification="center")
 
-    if board[0][0] == board[1][1] == board[2][2] and board[0][0] != 0:
-        sg.popup(f"Player {'X' if board[0][0] == 1 else 'O'} has won!")
-        new_field(player, board, window)
+    # Create a list to store the state of the game
+    board = [[0 for _ in range(3)] for _ in range(3)]
 
-    if board[0][2] == board[1][1] == board[2][0] and board[0][2] != 0:
-        sg.popup(f"Player {'X' if board[0][2] == 1 else 'O'} has won!")
-        new_field(player, board, window)
+    return board, layout, window
 
+
+def check_win_player1(board):
+    if (board[0][0] == 1 and board[0][1] == 1 and board[0][2] == 1) or \
+            (board[1][0] == 1 and board[1][1] == 1 and board[1][2] == 1) or \
+            (board[2][0] == 1 and board[2][1] == 1 and board[2][2] == 1) or \
+            (board[0][0] == 1 and board[1][0] == 1 and board[2][0] == 1) or \
+            (board[0][1] == 1 and board[1][1] == 1 and board[2][1] == 1) or \
+            (board[0][2] == 1 and board[1][2] == 1 and board[2][2] == 1) or \
+            (board[0][0] == 1 and board[1][1] == 1 and board[2][2] == 1) or \
+            (board[0][2] == 1 and board[1][1] == 1 and board[2][0] == 1):
+        return True
+    return False
+
+
+def check_win_player2(board):
+    if (board[0][0] == -1 and board[0][1] == -1 and board[0][2] == -1) or \
+            (board[1][0] == -1 and board[1][1] == -1 and board[1][2] == -1) or \
+            (board[2][0] == -1 and board[2][1] == -1 and board[2][2] == -1) or \
+            (board[0][0] == -1 and board[1][0] == -1 and board[2][0] == -1) or \
+            (board[0][1] == -1 and board[1][1] == -1 and board[2][1] == -1) or \
+            (board[0][2] == -1 and board[1][2] == -1 and board[2][2] == -1) or \
+            (board[0][0] == -1 and board[1][1] == -1 and board[2][2] == -1) or \
+            (board[0][2] == -1 and board[1][1] == -1 and board[2][0] == -1):
+        return True
+    return False
 
 def check_draw(board):
     for i in range(3):
@@ -32,29 +50,27 @@ def check_draw(board):
     return True
 
 
-def new_field(player,board,window):
+def new_field(player, board, window):
     player = -player
     for row in range(3):
         for col in range(3):
             board[row][col] = 0
             window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
+def save_score(p_names, result, index):
+    # Get the desired player name from the list
+    p_name = p_names[index]
 
-def main():
+    # Open the file in append mode
+    with open("scores.txt", "a") as file:
+        file.write(p_name + " " + result + "\n")
 
-    sg.ChangeLookAndFeel("DarkAmber")
-    # Create the layout of the game
-    layout = create_tic_tac_toe_layout()
-
-    # Create the window
-    window = sg.Window('Tic-Tac-Toe', layout, size=(1100, 700), resizable=True, element_justification="center")
-
-    # Create a list to store the state of the game
-    board = [[0 for _ in range(3)] for _ in range(3)]
+def main(p_names: list):
 
     # Create a player
     player = 1
 
+    board, layout, window = create_game(p_names)
     # Main game loop
     while True:
         # Read the window
@@ -77,20 +93,37 @@ def main():
                 player = -player
                 window[event].update("O" if player == 1 else "X", button_color=("black", "#FC9E47" if player == 1 else "#B8F1FF"))
 
+
         # If the event is the "New Game" button, reset the board and switch players
         if event == "New Game":
             new_field(player, board, window)
 
 
         #Check if someone has won the game
-        check_win(player, board, window)
-        if check_draw(board):
-            sg.popup(f"Draw")
+        if check_win_player1(board):
+            sg.popup(f"Player 'X has won!")
+            save_score(p_names, "Win", 0)
+            save_score(p_names, "Lose", 1)
             new_field(player, board, window)
 
+        if check_win_player2(board):
+            sg.popup(f"Player 'O has won!")
+            save_score(p_names, "Lose", 0)
+            save_score(p_names, "Win", 1)
+            new_field(player, board, window)
+
+        if check_draw(board):
+            sg.popup(f"Draw")
+            save_score(p_names, "Draw", 0)
+            save_score(p_names, "Draw", 1)
+            new_field(player, board, window)
+
+        if player == 1:
+            window['active_player'].update(f'Current Player: {p_names[0]}', background_color="#B8F1FF", text_color="black")
+        elif player == -1:
+            window['active_player'].update(f'Current Player: {p_names[1]}', background_color="#FC9E47", text_color="black")
         # Close the window
     window.close()
 
 
-if __name__ == '__main__':
-    main()
+

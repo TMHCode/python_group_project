@@ -8,12 +8,12 @@ root.title("Rock Paper Scissor")
 root.configure(background="#ebf0f3")
 
 # picture
-rock_img = ImageTk.PhotoImage(Image.open("assets/stone.png"))
-paper_img = ImageTk.PhotoImage(Image.open("assets/paper.png"))
-scissor_img = ImageTk.PhotoImage(Image.open("assets/scissor.png"))
-rock_img_comp = ImageTk.PhotoImage(Image.open("assets/stone.png"))
-paper_img_comp = ImageTk.PhotoImage(Image.open("assets/paper.png"))
-scissor_img_comp = ImageTk.PhotoImage(Image.open("assets/scissor.png"))
+rock_img = ImageTk.PhotoImage(Image.open("stone.png"))
+paper_img = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img = ImageTk.PhotoImage(Image.open("scissor.png"))
+rock_img_comp = ImageTk.PhotoImage(Image.open("stone.png"))
+paper_img_comp = ImageTk.PhotoImage(Image.open("paper.png"))
+scissor_img_comp = ImageTk.PhotoImage(Image.open("scissor.png"))
 
 # insert picture
 user_label = Label(root, image=scissor_img, bg="#ebf0f3")

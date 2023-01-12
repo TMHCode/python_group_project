@@ -157,9 +157,10 @@ def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
 
 # ----- LAYOUT for tic_tac_toe.py -----
 def create_tic_tac_toe_layout(p_names: list):
+    grid_layout = [[sg.Button(" ", size=(5, 2), pad=(0, 0), font=("Helvetica", 20), key=(i, j)) for i in range(3)] for j in range(3)]
+
     game_column = [
-        *[[sg.Button(" ", size=(5, 2), pad=(0, 0), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
-          for j in range(3)],
+        [sg.Push(), sg.Column(grid_layout), sg.Push()],
         [sg.Button('Back', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8),
          sg.Button('New Game', size=(14, 2), pad=(50, 15), border_width=10)]
     ]

@@ -27,7 +27,7 @@ def main(game):
             if game == 'Connect Four':
                 connect_four_bot.main([values['input_player_name'], 'Bot'])
             elif game == 'Rock-Paper-Scissors':
-                PVBnew.main([values['input_player_name', 'Bot']])
+                PVBnew.main([values['input_player_name'], 'Bot'])
             elif game == 'Tic-Tac-Toe':
                 tic_tac_toe_vs_bot.main(([values['input_player_name'], 'Bot']))
             break

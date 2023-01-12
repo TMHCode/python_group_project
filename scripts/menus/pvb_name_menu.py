@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 from scripts.games.connect_four import connect_four_bot
 from scripts.games.tic_tac_toe import tic_tac_toe_vs_bot
+from scripts.games.rock_paper_scissors import  PVBnew
 from scripts.menus import main_menu
 from scripts.layouts import create_pvb_name_menu_layout
 
@@ -26,10 +27,9 @@ def main(game):
             if game == 'Connect Four':
                 connect_four_bot.main([values['input_player_name'], 'Bot'])
             elif game == 'Rock-Paper-Scissors':
-                pass
+                PVBnew.main([values['input_player_name', 'Bot']])
             elif game == 'Tic-Tac-Toe':
                 tic_tac_toe_vs_bot.main(([values['input_player_name'], 'Bot']))
-                pass
             break
 
     window.close()

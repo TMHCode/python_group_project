@@ -1,18 +1,19 @@
 import PySimpleGUI as sg
 import random
 import pickle
+import os
 
 
 # Save the player's name and score to a file
 def save_data(name, score):
     data = {'name': name, 'score': score}
-    with open("data.pkl", "wb") as file:
+    with open("../../../data.pkl", "wb") as file:
         pickle.dump(data, file)
 
 
 # Load the player's name and score from a file
 def load_data():
-    with open("data.pkl", "rb") as file:
+    with open("../../../data.pkl", "rb") as file:
         return pickle.load(file)
 
 

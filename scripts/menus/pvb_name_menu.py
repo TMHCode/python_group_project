@@ -2,13 +2,12 @@ import PySimpleGUI as sg
 
 from scripts.games.connect_four import connect_four_bot
 from scripts.games.tic_tac_toe import tic_tac_toe_vs_bot
-from scripts.games.rock_paper_scissors import  PVBnew
+from scripts.games.rock_paper_scissors import PVBnew
 from scripts.menus import main_menu
 from scripts.layouts import create_pvb_name_menu_layout
 
 
 def main(game):
-
     # Create the layout
     layout = create_pvb_name_menu_layout(game)
 

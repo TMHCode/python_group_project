@@ -4,10 +4,10 @@ import pickle
 from scripts.layouts import create_RPS_layout
 
 
-def main(p_names):
+def main(n):
     sg.theme('DarkAmber')
 
-    layout = create_RPS_layout(p_names)
+    layout = create_RPS_layout(n)
     window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 500), resizable=True, element_justification='center')
     score = {'wins': 0, 'losses': 0, 'ties': 0}
     score_text = window['-SCORE-']
@@ -15,8 +15,6 @@ def main(p_names):
     while True:
         event, values = window.read()
         if event in (None, 'Quit'):
-            break
-        elif event in (None, 'Safe'):
             break
         elif event in (None, 'New'):
             score = {'wins': 0, 'losses': 0, 'ties': 0}

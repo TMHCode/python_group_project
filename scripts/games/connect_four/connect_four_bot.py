@@ -3,6 +3,7 @@ import random
 
 from scripts.menus import main_menu
 from scripts.layouts import create_connect_four_layout
+from scripts.statistics.stats import save_score
 
 
 ## Game constants
@@ -115,6 +116,8 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int, valid_turn: bool):
 # main function
 def main(p_names: list):
 
+    game_name = "c4"
+
     # Set the font size of the window
     sg.SetOptions(font=('Helvetica', 18))
 
@@ -161,8 +164,10 @@ def main(p_names: list):
         # Check if the current player has won
         if check_win(grid, current_player):
             if current_player == 0:
+                save_score(p_names, "Win", 0, game_name)
                 choice, _ = sg.Window('Game End', [[sg.T(p_names[0] + ' wins!', font=('Helvetica', 30, 'bold'), pad=(0, 5), justification='center', text_color='#6F3AFC')], [sg.T('Do you want to play again?', font=('Helvetica', 15), pad=(0, 30), justification='center', text_color="#FFF7E2")], [sg.No(s=10, button_color=('black', '#B8F1FF')), sg.Yes(s=10, button_color=('black', '#FC9E47'))]], disable_close=True).read(close=True)
             else:
+                save_score(p_names, "Lose", 0, game_name)
                 choice, _ = sg.Window('Game End', [[sg.T('Bot wins!', font=('Helvetica', 30, 'bold'), pad=(0, 5), justification='center', text_color='#FCF060')], [sg.T('Do you want to play again?', font=('Helvetica', 15), pad=(0, 30), justification='center', text_color="#FFF7E2")], [sg.No(s=10, button_color=('black', '#B8F1FF')), sg.Yes(s=10, button_color=('black', '#FC9E47'))]], disable_close=True).read(close=True)
             # Pop-Up choice 'No'
             if choice == 'No':
@@ -178,10 +183,12 @@ def main(p_names: list):
 
         # Check if the board is full
         if check_full(grid):
+            save_score(p_names, "Draw", 0, game_name)
             choice, _ = sg.Window('Game End', [[sg.T('Draw!', font=('Helvetica', 30, 'bold'), pad=(0, 5),
                                                      justification='center', text_color='#FC9E47')], [
                                                    sg.T('The board is full.', font=('Helvetica', 15),
-                                                        pad=(0, 30), justification='center', text_color="#FFF7E2")],
+                                                        pad=(0, 30), justification='center', text_color="#FFF7E2")],[
+                                                   sg.T('Do you want to play again?', font=('Helvetica', 15), justification='center', text_color="#FFF7E2")],
                                                [sg.No(s=10, button_color=('black', '#B8F1FF')),
                                                 sg.Yes(s=10, button_color=('black', '#FC9E47'))]],
                                   disable_close=True).read(close=True)

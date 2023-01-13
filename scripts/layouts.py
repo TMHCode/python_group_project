@@ -95,46 +95,13 @@ def create_pvb_name_menu_layout(game):
         [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
-
-
 # ----------
 
 
 # ----- LAYOUT for scoreboard_menu.py -----
-def create_scoreboard_menu_layout():
-
-    # Initialize an empty dictionary to store the win, lose, and draw counts for each player
-    player_records = {}
-
-    # Open the text file and read the lines
-    with open('scores.txt') as f:
-        lines = f.readlines()
-
-    # Iterate through each line of the file
-    for line in lines:
-        # Split the line into words
-        words = line.split()
-        player = words[0]
-        outcome = words[1]
-        # check if player already exists in the dictionary
-        if player in player_records:
-            if outcome == 'Win':
-                player_records[player]['Wins'] += 1
-            elif outcome == 'Lose':
-                player_records[player]['Loses'] += 1
-            elif outcome == 'Draw':
-                player_records[player]['Draws'] += 1
-        # if player not exists in the dictionary
-        else:
-            if outcome == 'Win':
-                player_records[player] = {'Wins': 1, 'Loses': 0, 'Draws': 0}
-            elif outcome == 'Lose':
-                player_records[player] = {'Wins': 0, 'Loses': 1, 'Draws': 0}
-            elif outcome == 'Draw':
-                player_records[player] = {'Wins': 0, 'Loses': 0, 'Draws': 1}
-
+def create_scoreboard_menu_layout(player_records):
     ttt_column = []
-    sorted_players = sorted(player_records.items(), key=lambda x: x[1]['Wins'] / (x[1]['Wins'] + x[1]['Loses']),reverse=True)
+    sorted_players = sorted(player_records['ttt'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     ttt_column.append(
         [sg.Text('Player'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
@@ -142,11 +109,10 @@ def create_scoreboard_menu_layout():
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         ttt_column.append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]),sg.Text(f'{records["Wins"] / (records["Wins"] + records["Loses"]):.2%}')])
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
 
-    c4_column= []
-    sorted_players = sorted(player_records.items(), key=lambda x: x[1]['Wins'] / (x[1]['Wins'] + x[1]['Loses']),
-                            reverse=True)
+    c4_column = []
+    sorted_players = sorted(player_records['c4'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     c4_column.append(
         [sg.Text('Tobi'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
@@ -154,12 +120,10 @@ def create_scoreboard_menu_layout():
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         c4_column.append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]),
-             sg.Text(f'{records["Wins"] / (records["Wins"] + records["Loses"]):.2%}')])
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
 
     rps_column = []
-    sorted_players = sorted(player_records.items(), key=lambda x: x[1]['Wins'] / (x[1]['Wins'] + x[1]['Loses']),
-                            reverse=True)
+    sorted_players = sorted(player_records['rps'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     rps_column.append(
         [sg.Text('Rock-Paper-Scissors'), sg.Text('Trung'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
@@ -167,8 +131,7 @@ def create_scoreboard_menu_layout():
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         rps_column .append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]),
-             sg.Text(f'{records["Wins"] / (records["Wins"] + records["Loses"]):.2%}')])
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
 
     return [
             [sg.VPush()],
@@ -188,14 +151,6 @@ def create_scoreboard_menu_layout():
                        pad=(0, 0))]
 
     ]
-
-# Create the layout for the window
-
-
-
-
-
-
 # ----------
 ########################################
 

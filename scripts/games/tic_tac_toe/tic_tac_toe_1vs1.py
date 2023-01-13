@@ -62,7 +62,7 @@ def save_score(p_names, result, index, game_name):
     p_name = p_names[index]
 
     # Open the file in append mode
-    with open("scores.txt", "a") as file:
+    with open("../../scores.txt", "a") as file:
         file.write(p_name + " " + result + " " + game_name + "\n")
 
 def main(p_names: list):

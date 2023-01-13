@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 player_records = {}
 
 # Open the text file and read the lines
-with open('scores.txt') as f:
+with open('../../scores.txt') as f:
     lines = f.readlines()
 
 # Iterate through each line of the file

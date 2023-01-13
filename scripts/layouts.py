@@ -34,11 +34,13 @@ def create_main_menu_layout():
 
 # ----- LAYOUT for mode_menu.py -----
 def create_mode_menu_layout(game):
+    header_font_size = 50 if game != 'Rock-Paper-Scissors' else 45
     return [
         [sg.VPush()],
-        [sg.Push(), sg.Text(f'Mode Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'),
+        [sg.Push(), sg.Text(f'{game}', size=(30, 1), pad=(10, 10), font=('Helvetica', header_font_size, 'bold'),
                             text_color='#FFF7E2', justification='center'), sg.Push()],
-        [sg.Push(), sg.Text('Chose your game-mode!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+        [sg.HSeparator()],
+        [sg.Push(), sg.Text('Chose your game-mode!', size=(30, 2), font=('Helvetica', 20), pad=(0, 20), justification='center', text_color='#FC9E47'), sg.Push()],
         [sg.Push(), sg.Button('Player vs. Player', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)),
          sg.Push()],
         [sg.Push(), sg.Button('Player vs. Bot', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)),
@@ -54,15 +56,17 @@ def create_mode_menu_layout(game):
 
 # ----- LAYOUT for pvp_name_menu.py -----
 def create_pvp_name_menu_layout(game):
+    header_font_size = 50 if game != 'Rock-Paper-Scissors' else 45
     return [
         [sg.VPush()],
-        [sg.Push(), sg.Text(f'Name Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'),
+        [sg.Push(), sg.Text(f'{game}', size=(30, 1), pad=(10, 10), font=('Helvetica', header_font_size, 'bold'),
                             text_color='#FFF7E2', justification='center'), sg.Push()],
-        [sg.Push(), sg.Text('Enter your names!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
-        [sg.Push(), sg.Text('Player 1:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)),
-         sg.InputText('Player 1', key='input_p1_name'), sg.Push()],
-        [sg.Push(), sg.Text('Player 2:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)),
-         sg.InputText('Player 2', key='input_p2_name'), sg.Push()],
+        [sg.HSeparator()],
+        [sg.Push(), sg.Text('Enter your names!', size=(30, 2), font=('Helvetica', 20), pad=(0, 20), justification='center', text_color='#FC9E47'), sg.Push()],
+        [sg.Push(), sg.Text('Player 1:', size=(10, 1), font=('Helvetica', 20), pad=(0, 10)),
+         sg.Input(key='input_p1_name', size=(15, 1), pad=(0, 10)), sg.Push()],
+        [sg.Push(), sg.Text('Player 2:', size=(10, 1), font=('Helvetica', 20), pad=(0, 10)),
+         sg.Input(key='input_p2_name', size=(15, 1), pad=(0, 10)), sg.Push()],
         [sg.Push(), sg.Button('Continue', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)),
          sg.Push()],
         [sg.VPush()],
@@ -76,39 +80,77 @@ def create_pvp_name_menu_layout(game):
 
 # ----- LAYOUT for pvb_name_menu.py -----
 def create_pvb_name_menu_layout(game):
+    header_font_size = 50 if game != 'Rock-Paper-Scissors' else 45
     return [
         [sg.VPush()],
-        [sg.Push(), sg.Text(f'Name Menu - {game}', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'),
+        [sg.Push(), sg.Text(f'{game}', size=(30, 1), pad=(10, 10), font=('Helvetica', header_font_size, 'bold'),
                             text_color='#FFF7E2', justification='center'), sg.Push()],
-        [sg.Push(), sg.Text('Enter your name!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
-        [sg.Push(), sg.Text('Player:', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)),
-         sg.InputText('name player', key='input_player_name'), sg.Push()],
+        [sg.HSeparator()],
+        [sg.Push(), sg.Text('Enter your name!', size=(30, 2), font=('Helvetica', 20), pad=(0, 20), justification='center', text_color='#FC9E47'), sg.Push()],
+        [sg.Push(), sg.Text('Player:', size=(8, 1), font=('Helvetica', 20), pad=(0, 10)),
+         sg.Input(key='input_player_name', size=(15, 1), pad=(0, 10)), sg.Push()],
         [sg.Push(), sg.Button('Continue', size=(17, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)),
          sg.Push()],
         [sg.VPush()],
         [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
-
-
 # ----------
 
 
 # ----- LAYOUT for scoreboard_menu.py -----
-def create_scoreboard_menu_layout():
+def create_scoreboard_menu_layout(player_records):
+    ttt_column = []
+    sorted_players = sorted(player_records['ttt'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
+    # Append the headers
+    ttt_column.append(
+        [sg.Text('Player'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+    # Append the top 10 players to the layout
+    for i in range(min(10, len(sorted_players))):
+        player, records = sorted_players[i]
+        ttt_column.append(
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+
+    c4_column = []
+    sorted_players = sorted(player_records['c4'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
+    # Append the headers
+    c4_column.append(
+        [sg.Text('Tobi'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+    # Append the top 10 players to the layout
+    for i in range(min(10, len(sorted_players))):
+        player, records = sorted_players[i]
+        c4_column.append(
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+
+    rps_column = []
+    sorted_players = sorted(player_records['rps'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
+    # Append the headers
+    rps_column.append(
+        [sg.Text('Rock-Paper-Scissors'), sg.Text('Trung'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+    # Append the top 10 players to the layout
+    for i in range(min(10, len(sorted_players))):
+        player, records = sorted_players[i]
+        rps_column .append(
+            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+
     return [
-        [sg.VPush()],
-        [sg.Push(),
-         sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
-                 justification='center'), sg.Push()],
-        [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
-        [sg.VPush()],
-        [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
-                   pad=(0, 0))]
+            [sg.VPush()],
+            [sg.Push(),
+             sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+                     justification='center'), sg.Push()],
+            [(sg.Column(ttt_column, key='TTT_key')), (sg.Column(c4_column, visible=False, key='C4_key')), (sg.Column(rps_column, visible=False, key='RPS_key'))],
+            [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
+            [sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
+                   pad=(0, 0)),
+                sg.Button('C4', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
+                       pad=(0, 0)),
+                sg.Button('RPS', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
+                        pad=(0, 0))],
+            [sg.VPush()],
+            [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
+                       pad=(0, 0))]
 
     ]
-
-
 # ----------
 ########################################
 
@@ -157,9 +199,10 @@ def create_connect_four_layout(col_count: int, row_count: int, p_names: list):
 
 # ----- LAYOUT for tic_tac_toe.py -----
 def create_tic_tac_toe_layout(p_names: list):
+    grid_layout = [[sg.Button(" ", size=(5, 2), pad=(0, 0), font=("Helvetica", 20), key=(i, j)) for i in range(3)] for j in range(3)]
+
     game_column = [
-        *[[sg.Button(" ", size=(5, 2), pad=(0, 0), font=("Helvetica", 20), key=(i, j)) for i in range(3)]
-          for j in range(3)],
+        [sg.Push(), sg.Column(grid_layout), sg.Push()],
         [sg.Button('Back', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8),
          sg.Button('New Game', size=(14, 2), pad=(50, 15), border_width=10)]
     ]

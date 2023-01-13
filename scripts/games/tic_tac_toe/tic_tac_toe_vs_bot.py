@@ -5,6 +5,7 @@ import pickle
 
 from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
+from scripts.statistics.stats import save_score
 
 
 def create_game(p_names: list):
@@ -96,19 +97,12 @@ def bot_move(player, board, window):
             break
 
 
-def save_score(p_names, result):
-    # Convert the list of names to a string
-    p_names_str = ", ".join(p_names)
-
-    # Open the file in append mode
-    with open("scores_ttt.txt", "a") as file:
-        file.write(p_names_str + " " + result + "\n")
-
-
 def main(p_names: list):
 
     # Create a player
     player = 1
+
+    game_name = "ttt"
 
     board, layout, window = create_game(p_names)
     # Main game loop
@@ -134,14 +128,14 @@ def main(p_names: list):
                 window[event].update("X", button_color=("black", "#B8F1FF"))
                 if check_win_player(board):
                     sg.popup(f"Player 'X' has won!")
-                    save_score(p_names, "Win")
+                    save_score(p_names, "Win", 0, game_name)
                     new_field(player, board, window)
                     continue
                 if not check_draw(board):
                     bot_move(player, board, window)
                     if check_win_bot(board):
                         sg.popup(f"Player 'O' has won!")
-                        save_score(p_names, "Lose")
+                        save_score(p_names, "Lose", 0, game_name)
                         new_field(player, board, window)
 
         # If the event is the "New Game" button, reset the board and switch players
@@ -151,8 +145,11 @@ def main(p_names: list):
         if check_draw(board):
             sg.popup(f"Draw")
             new_field(player, board, window)
-            save_score(p_names, "Draw")
+            save_score(p_names, "Draw", 0, game_name)
 
         # Close the window
     window.close()
+
+
+
 

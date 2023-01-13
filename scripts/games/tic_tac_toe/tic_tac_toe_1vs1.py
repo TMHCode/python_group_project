@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
+from scripts.statistics.stats import save_score
 
 
 def create_game(p_names: list):
@@ -57,19 +58,12 @@ def new_field(player, board, window):
             board[row][col] = 0
             window[(row, col)].update(" ", button_color=("#FCCB53", "#FCCB53"))
 
-def save_score(p_names, result, index):
-    # Get the desired player name from the list
-    p_name = p_names[index]
-
-    # Open the file in append mode
-    with open("scores.txt", "a") as file:
-        file.write(p_name + " " + result + "\n")
 
 def main(p_names: list):
 
     # Create a player
     player = 1
-
+    game_name = "ttt"
     board, layout, window = create_game(p_names)
     # Main game loop
     while True:
@@ -102,20 +96,20 @@ def main(p_names: list):
         #Check if someone has won the game
         if check_win_player1(board):
             sg.popup(f"Player 'X has won!")
-            save_score(p_names, "Win", 0)
-            save_score(p_names, "Lose", 1)
+            save_score(p_names, "Win", 0, game_name)
+            save_score(p_names, "Lose", 1, game_name)
             new_field(player, board, window)
 
         if check_win_player2(board):
             sg.popup(f"Player 'O has won!")
-            save_score(p_names, "Lose", 0)
-            save_score(p_names, "Win", 1)
+            save_score(p_names, "Lose", 0, game_name)
+            save_score(p_names, "Win", 1, game_name)
             new_field(player, board, window)
 
         if check_draw(board):
             sg.popup(f"Draw")
-            save_score(p_names, "Draw", 0)
-            save_score(p_names, "Draw", 1)
+            save_score(p_names, "Draw", 0, game_name)
+            save_score(p_names, "Draw", 1, game_name)
             new_field(player, board, window)
 
         if player == 1:

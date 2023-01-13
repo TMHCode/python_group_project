@@ -5,6 +5,7 @@ import pickle
 
 from scripts.menus import main_menu
 from scripts.layouts import create_tic_tac_toe_layout
+from scripts.statistics.stats import save_score
 
 
 def create_game(p_names: list):
@@ -96,13 +97,6 @@ def bot_move(player, board, window):
             break
 
 
-def save_score(p_names, result, index, game_name):
-    # Get the desired player name from the list
-    p_name = p_names[index]
-
-    # Open the file in append mode
-    with open("../../scores.txt", "a") as file:
-        file.write(p_name + " " + result + " " + game_name + "\n")
 def main(p_names: list):
 
     # Create a player

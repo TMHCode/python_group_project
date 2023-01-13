@@ -75,7 +75,7 @@ def switch_player(cur_player: int):
         return 0
 
 
-def bot_turn(grid: list, window: sg.Window, cur_player: int):
+def bot_turn(grid: list, window: sg.Window, cur_player: int, valid_turn: bool):
     bot_col = -1
     ## preventing player from winning
     for col in range(COL_COUNT):
@@ -126,7 +126,7 @@ def main(p_names: list):
         valid_turn = False  # bool to check if a turn was actually made (used for the switch player check)
         # Check if BOT turn
         if current_player == 1:
-            grid, window, valid_turn = bot_turn(grid, window, current_player)
+            grid, window, valid_turn = bot_turn(grid, window, current_player, valid_turn)
         else:
             # Get the button click event
             event, values = window.read()

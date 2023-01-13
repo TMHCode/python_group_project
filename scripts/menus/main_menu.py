@@ -4,7 +4,7 @@ from scripts.layouts import create_main_menu_layout
 from scripts.menus import mode_menu, scoreboard_menu
 
 # Set the size of the window
-sg.SetOptions(font=('Helvetica', 20))
+sg.SetOptions(font=('Helvetica', 15))
 
 
 def main():

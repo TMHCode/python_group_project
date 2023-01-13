@@ -5,6 +5,7 @@ from scripts.menus import main_menu
 from scripts.statistics.stats import load_scores
 
 
+
 def main():
     # get player records from file
     player_records = load_scores()

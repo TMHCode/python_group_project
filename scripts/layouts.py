@@ -100,55 +100,68 @@ def create_pvb_name_menu_layout(game):
 
 # ----- LAYOUT for scoreboard_menu.py -----
 def create_scoreboard_menu_layout(player_records):
+
+# -----TTT-Stats-Table-----
+
     ttt_column = []
     sorted_players = sorted(player_records['ttt'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     ttt_column.append(
-        [sg.Text('Player'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
+    ttt_column.append(
+        [sg.HSeparator()])
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         ttt_column.append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+            [sg.Push(), sg.Text(player, size=(10, 0), justification='center'), sg.Text(records["Wins"], size=(10, 0), justification='center'), sg.Text(records["Draws"], size=(10, 0), justification='center'), sg.Text(records["Loses"], size=(10, 0), justification='center'), sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
+
+# -----C4-Stats-Table-----
 
     c4_column = []
     sorted_players = sorted(player_records['c4'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     c4_column.append(
-        [sg.Text('Tobi'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
+    c4_column.append(
+        [sg.HSeparator()])
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         c4_column.append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+            [sg.Push(), sg.Text(player, size=(10, 0), justification='center'), sg.Text(records["Wins"], size=(10, 0), justification='center'), sg.Text(records["Draws"], size=(10, 0), justification='center'), sg.Text(records["Loses"], size=(10, 0), justification='center'), sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
+
+# -----RPS-Stats-Table-----
 
     rps_column = []
     sorted_players = sorted(player_records['rps'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     rps_column.append(
-        [sg.Text('Rock-Paper-Scissors'), sg.Text('Trung'), sg.Text('Wins'), sg.Text('Draws'), sg.Text('Loses'), sg.Text('Win Rate')])
+        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
+    rps_column.append(
+        [sg.HSeparator()])
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
         rps_column .append(
-            [sg.Text(player), sg.Text(records["Wins"]), sg.Text(records["Draws"]), sg.Text(records["Loses"]), sg.Text(records["Winrate"])])
+            [sg.Push(), sg.Text(player, size=(10, 0), justification='center'), sg.Text(records["Wins"], size=(10, 0), justification='center'), sg.Text(records["Draws"], size=(10, 0), justification='center'), sg.Text(records["Loses"], size=(10, 0), justification='center'), sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
 
     return [
             [sg.VPush()],
             [sg.Push(),
              sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                      justification='center'), sg.Push()],
-            [(sg.Column(ttt_column, key='TTT_key')), (sg.Column(c4_column, visible=False, key='C4_key')), (sg.Column(rps_column, visible=False, key='RPS_key'))],
-            [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), pad=(10, 10)), sg.Push()],
-            [sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
-                   pad=(0, 0)),
-                sg.Button('C4', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
-                       pad=(0, 0)),
-                sg.Button('RPS', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
-                        pad=(0, 0))],
-            [sg.VPush()],
-            [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
-                       pad=(0, 0))]
+            [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), justification='center'), sg.Push()],
+            [sg.Column(ttt_column, key='TTT_key', justification='center'), (sg.Column(c4_column, visible=False, key='C4_key', justification='center')), (sg.Column(rps_column, visible=False, key='RPS_key',justification='center'))],
+            [sg.Button('Back', size=(5, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
+                           pad=(0, 0)),
+                sg.Push(), sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', "#FCCB53"),
+                   pad=(0, 20)),
+                sg.Button('C4', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', "#FCCB53"),
+                       pad=(0, 20)),
+                sg.Button('RPS', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', "#FCCB53"),
+                        pad=(0, 20)), sg.Push()],
+            [sg.VPush()]
 
     ]
 # ----------
@@ -219,8 +232,7 @@ def create_tic_tac_toe_layout(p_names: list):
          sg.Text(' X ', size=(2, 0), background_color="#B8F1FF", text_color="black")],
         [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2'),
          sg.Text(' O ', size=(2, 0), background_color="#FC9E47", text_color="black")],
-        [sg.HSeparator(color='#403731')],
-        [sg.Text('Round: 1', background_color='#403731', text_color='#FFF7E2', key='round_number')]
+
     ]
 
     return [

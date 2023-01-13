@@ -28,7 +28,7 @@ def main(p_names: list):
             p2 = 'paper'
         elif event == 'p2-scissors':
             p2 = 'scissors'
-        elif event == 'Play':
+        elif event == 'Show':
             if p1 == p2:
                 sg.Popup('Draw')
             elif (p1 == 'rock' and p2 == 'scissors') or (p1 == 'scissors' and p2 == 'paper') or (

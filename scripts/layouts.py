@@ -238,16 +238,3 @@ def create_RPS_pvp_layout(p_names: list):
 
             [sg.Button('New', size=(10, 10), font=("Arial", 20)),
              sg.Button('Quit', size=(10, 10), font=("Arial", 20))]]
-
-
-def create_RPS_pvpp_layout(p_names: list):
-    return [[sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name'),
-             sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2')],
-            [sg.Text('Player 1 Select your move')],
-            [sg.Button('Rock'), sg.Button('Paper'), sg.Button('Scissors')],
-            [sg.Text('Player 2 Select your move')],
-            [sg.Button('Rock'), sg.Button('Paper'), sg.Button('Scissors')],
-            [sg.Text('Result:')],
-            [sg.Output(size=(20, 10))],
-            [sg.Text('Player 1 Score: 0'), sg.Text('Player 2 Score: 0')]
-            ]

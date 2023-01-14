@@ -19,33 +19,31 @@ def main(game: str):
     :param game: (str)  name of the game. Can be 'ttt', 'c4' or 'rps'
     :return:  NO return parameter.
     """
+    layout = create_pvp_name_menu_layout(game)                                  # create the layout
 
-    # Create the layout
-    layout = create_pvp_name_menu_layout(game)
+    window = sg.Window('Name Menu', layout, size=(1200, 800), resizable=True)   # create the window
 
-    # Create the window
-    window = sg.Window('Name Menu', layout, size=(1200, 800), resizable=True)
-
-    # Loop to handle events
+    # Main Loop
     while True:
-        event, values = window.read()
-        if event in (sg.WIN_CLOSED, 'Back'):
+        event, values = window.read()                           # get the button click event
+        if event in (sg.WIN_CLOSED, 'Back'):                    # when Back button is pressed, go back to the main menu
             window.close()
             main_menu.main()
             break
-        elif event == 'Continue':
-            if values['input_p1_name'] == '' or values['input_p2_name'] == '':
+        elif event == 'Continue':                                               # when Continue button is pressed
+            if values['input_p1_name'] == '' or values['input_p2_name'] == '':  # check if names are not empty
                 sg.popup('Player name(s) can\'t be empty!')
                 continue
-            elif values['input_p1_name'] == values['input_p2_name']:
+            elif values['input_p1_name'] == values['input_p2_name']:            # check if names are not the same
                 sg.popup('Player names can\'t be identical!')
                 continue
-            if game == 'Connect Four':
-                connect_four.main([values['input_p1_name'], values['input_p2_name']])
+            window.close()
+            if game == 'Connect Four':                          # depending on the game that was selected earlier
+                connect_four.main([values['input_p1_name'], values['input_p2_name']])   # go to that game
             elif game == 'Rock-Paper-Scissors':
                 rps_pvp.main([values['input_p1_name'], values['input_p2_name']])
             elif game == 'Tic-Tac-Toe':
                 tic_tac_toe_1vs1.main([values['input_p1_name'], values['input_p2_name']])
             break
 
-    window.close()
+    window.close()                                                                      # close the window

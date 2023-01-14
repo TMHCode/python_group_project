@@ -14,11 +14,9 @@ def save_score(p_names: list, result: str, index: int, game_name: str):
     :param game_name: (str) name of the played game. can be 'ttt', 'c4' or 'rps'
     :return: NO return value
     """
-    # Get the desired player name from the list
-    p_name = p_names[index]
+    p_name = p_names[index]                             # get the desired player name from the list
 
-    # Open the file in append mode
-    with open("statistics/scores.txt", "a") as file:
+    with open("statistics/scores.txt", "a") as file:    # open the file in append mode
         file.write(p_name + " " + result + " " + game_name + "\n")
 
 
@@ -32,30 +30,26 @@ def load_scores():
     """
     # Initialize an empty dictionary to store the win, lose, and draw counts for each player in each game
     player_records = {'ttt': {}, 'c4': {}, 'rps': {}}
-    # Open the text file and read the lines
-    with open('statistics/scores.txt') as f:
+    with open('statistics/scores.txt') as f:                # Open the text file and read the lines
         lines = f.readlines()
-    # Iterate through each line of the file
-    for line in lines:
-        # Split the line into words
-        player, outcome, game = line.split()
-        # check if player already exists in the dictionary
-        if player in player_records[game]:
-            if outcome == 'Win':
-                player_records[game][player]['Wins'] += 1
+
+    for line in lines:                                      # Iterate through each line of the file
+        player, outcome, game = line.split()                # Split the line into words
+        if player in player_records[game]:                  # check if player already exists in the dictionary
+            if outcome == 'Win':                            # if yes
+                player_records[game][player]['Wins'] += 1   # add win
             elif outcome == 'Lose':
-                player_records[game][player]['Loses'] += 1
+                player_records[game][player]['Loses'] += 1  # add lose
             elif outcome == 'Draw':
-                player_records[game][player]['Draws'] += 1
-        # if player not exists in the dictionary
-        else:
-            if outcome == 'Win':
+                player_records[game][player]['Draws'] += 1  # add draw
+        else:                                               # if player not exists in the dictionary
+            if outcome == 'Win':                            # create a new set of data for this new player
                 player_records[game][player] = {'Wins': 1, 'Loses': 0, 'Draws': 0}
             elif outcome == 'Lose':
                 player_records[game][player] = {'Wins': 0, 'Loses': 1, 'Draws': 0}
             elif outcome == 'Draw':
                 player_records[game][player] = {'Wins': 0, 'Loses': 0, 'Draws': 1}
-    return calculate_winrate(player_records)
+    return calculate_winrate(player_records)                # call the calculate_winrate function
 
 
 def calculate_winrate(player_records: dict):
@@ -67,12 +61,12 @@ def calculate_winrate(player_records: dict):
     :return: (dict) dictionary of dictionaries that contains all the player scores for every game including win rate.
                             dict-structure: {'game': {'name': {'Wins': 0, 'Loses': 1, 'Draws': 2, 'Winrate': 0.0}}}
     """
-    for game in player_records:
-        for player in player_records[game]:
+    for game in player_records:                                                     # for every game
+        for player in player_records[game]:                                         # for every player in every game
             winrate = int(round(player_records[game][player]['Wins'] /
                                 (player_records[game][player]['Wins'] +
                                  player_records[game][player]['Loses'] +
-                                 player_records[game][player]['Draws']), 2) * 100)
+                                 player_records[game][player]['Draws']), 2) * 100)  # calculate the win rate
 
-            player_records[game][player]['Winrate'] = winrate
-    return player_records
+            player_records[game][player]['Winrate'] = winrate                       # and add it to the dictionary
+    return player_records                                                           # return the dictionary

@@ -37,7 +37,9 @@ def main(game: str):
             if values['input_p1_name'] == '' or values['input_p2_name'] == '':
                 sg.popup('Player name(s) can\'t be empty!')
                 continue
-            window.close()
+            elif values['input_p1_name'] == values['input_p2_name']:
+                sg.popup('Player names can\'t be identical!')
+                continue
             if game == 'Connect Four':
                 connect_four.main([values['input_p1_name'], values['input_p2_name']])
             elif game == 'Rock-Paper-Scissors':

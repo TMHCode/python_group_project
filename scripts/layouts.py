@@ -331,7 +331,7 @@ def create_rps_layout(p_names: list):
         [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                  justification='center')],
         [sg.Text(f"Make your choice {p_names[0]}", font=("Helvetica", 24), pad=(5, 10))],
-        [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2,
+        [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=0,
                    size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(10, 20)),
          sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2,
                    size=(7, 2), font=('Helvetica', 16), border_width=10,

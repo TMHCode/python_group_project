@@ -49,7 +49,7 @@ def block_p(window):
     window['p2-paper'].update(disabled=True)
     window['p2-scissors'].update(disabled=True)
 
-    window['Show'].update(disabled=False) #active the show button
+    window['Show'].update(disabled=False)  # active the show button
     return window
 
 
@@ -86,23 +86,30 @@ def main(p_names: list):
     :return: NO return value.
     """
 
-    game_name = 'rps'                   # name of game, need in the save_score() function
+    game_name = 'rps'  # name of game, need in the save_score() function
 
     layout = create_RPS_pvp_layout(p_names)  # setting up start variables
-    window = sg.Window('Rock-Paper-Scissors', layout, size=(1200, 800), resizable=True, element_justification='center') #create window
+    window = sg.Window('Rock-Paper-Scissors', layout, size=(1200, 800), resizable=True,
+                       element_justification='center')  # create window
 
-    p1 = 'p1'
-    p2 = 'p2'
+    p1 = 'p1'  # set up choice of player 1
+    p2 = 'p2'  # set up choice of player 2
 
+
+    # Game loop
     while True:
 
-        event, values = window.Read()
-        if event in (None, 'Back'):
+        event, values = window.Read()    # get the button click event
+
+        if event in (None, 'Back'):  # when Back button is pressed, go back to the main menu
             window.close()
             main_menu.main()
             break
 
-        elif event == 'p1-rock':
+        elif event is None:                           # fail-save
+            break
+
+        elif event == 'p1-rock':    #
             p1 = 'rock'
             window = disable_p1(window)
 

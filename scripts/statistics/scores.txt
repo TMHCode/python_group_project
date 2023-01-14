@@ -134,3 +134,5 @@ Tobi Win c4
 Tobi Lose c4
 2 Win rps
 1 Lose rps
+1 Lose rps
+1 Lose rps

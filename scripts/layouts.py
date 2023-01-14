@@ -107,8 +107,6 @@ def create_scoreboard_menu_layout(player_records):
     sorted_players = sorted(player_records['ttt'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     ttt_column.append(
-        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
-    ttt_column.append(
         [sg.HSeparator()])
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
@@ -121,8 +119,6 @@ def create_scoreboard_menu_layout(player_records):
     c4_column = []
     sorted_players = sorted(player_records['c4'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
-    c4_column.append(
-        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
     c4_column.append(
         [sg.HSeparator()])
     # Append the top 10 players to the layout
@@ -137,8 +133,6 @@ def create_scoreboard_menu_layout(player_records):
     sorted_players = sorted(player_records['rps'].items(), key=lambda x: x[1]['Winrate'], reverse=True)
     # Append the headers
     rps_column.append(
-        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center'), sg.Text('Wins', size=(10, 1), justification='center'), sg.Text('Draws', size=(10, 1), justification='center'), sg.Text('Loses', size=(10, 1), justification='center'), sg.Text('Win Rate', size=(10, 1), justification='center'), sg.Push()])
-    rps_column.append(
         [sg.HSeparator()])
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
@@ -151,7 +145,13 @@ def create_scoreboard_menu_layout(player_records):
             [sg.Push(),
              sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                      justification='center'), sg.Push()],
-            [sg.Push(), sg.Text('High scores!', size=(17, 2), font=('Helvetica', 20), justification='center'), sg.Push()],
+            [sg.HSeparator()],
+            [sg.Push(), sg.Text('High scores! - Tic-Tac-Toe', key='high_score_text', size=(30, 2), font=('Helvetica', 20), justification='center', text_color="#FC9E47"), sg.Push()],
+            [sg.Push(), sg.Text('Player', size=(10, 0), justification='center', text_color='#FFF7E2'),
+             sg.Text('Wins', size=(10, 1), justification='center', text_color='#FFF7E2'),
+             sg.Text('Draws', size=(10, 1), justification='center', text_color='#FFF7E2'),
+             sg.Text('Loses', size=(10, 1), justification='center', text_color='#FFF7E2'),
+             sg.Text('Win Rate', size=(10, 1), justification='center', text_color='#FFF7E2'), sg.Push()],
             [sg.Column(ttt_column, key='TTT_key', justification='center'), (sg.Column(c4_column, visible=False, key='C4_key', justification='center')), (sg.Column(rps_column, visible=False, key='RPS_key',justification='center'))],
             [sg.Button('Back', size=(5, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                            pad=(0, 0)),

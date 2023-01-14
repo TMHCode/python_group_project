@@ -313,12 +313,38 @@ def create_rps_layout(p_names: list):
     paper_img = os.path.join(current_directory, 'assets', 'paper.png')
     scissors_img = os.path.join(current_directory, 'assets', 'scissor.png')
 
-    return [[sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
+    return [[sg.Text(f'Current Player: {p_names[0]}', text_color='#FFF7E2',
+                     key='active_player')],
+            [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name')],
+            [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2')],
+            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
             [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2),
              sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2),
              sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors",
                        image_subsample=2)],
             [sg.Text('', key='-OUTCOME-')],
-            [sg.Text('Score: 0 wins, 0 losses, 0 ties', key='-SCORE-', font=("Arial", 20))],
+            [sg.Text('', key='-SCORE-', font=("Arial", 20))],
             [sg.Button('New', size=(10, 10), font=("Arial", 20)),
              sg.Button('Quit', size=(10, 10), font=("Arial", 20))]]
+
+
+def create_RPS_pvp_layout(p_names: list):
+    current_directory = os.path.abspath(os.path.dirname(__file__))
+    rock_img = os.path.join(current_directory, 'assets', 'stone.png')
+    paper_img = os.path.join(current_directory, 'assets', 'paper.png')
+    scissors_img = os.path.join(current_directory, 'assets', 'scissor.png')
+
+    return [[sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
+            [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name')],
+            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
+            [sg.Button('', image_filename=rock_img, button_color="white", key="p1-rock", image_subsample=4),
+             sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p1-paper", image_subsample=4),
+             sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p1-scissors",
+                       image_subsample=4)],
+            [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2')],
+            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
+            [sg.Button('', image_filename=rock_img, button_color="white", key="p2-rock", image_subsample=4),
+             sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p2-paper", image_subsample=4),
+             sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p2-scissors",
+                       image_subsample=4)],
+            [sg.Button('Show'), sg.Exit()]]

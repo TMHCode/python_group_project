@@ -1,14 +1,14 @@
 import PySimpleGUI as sg
 import random
-import pickle
-from scripts.layouts import create_rps_layout
+
+from scripts.layouts import create_RPS_layout
 
 
-def main(n):
+def main(p_names: list):
     sg.theme('DarkAmber')
 
-    layout = create_rps_layout(n)
-    window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 500), resizable=True, element_justification='center')
+    layout = create_RPS_layout(p_names)
+    window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 650), resizable=True, element_justification='center')
     score = {'wins': 0, 'losses': 0, 'ties': 0}
     score_text = window['-SCORE-']
 
@@ -25,7 +25,7 @@ def main(n):
         if outcome == 'win':
             score['wins'] += 1
             score_text.update(f'Score: {score["wins"]} wins, {score["losses"]} losses, {score["ties"]} ties')
-            sg.popup(f'You chose {event}. Computer chose {computer_choice}. You \n{outcome}', font=("Helvetica", 20),
+            sg.popup(f'You chose {event}. Bot choses {computer_choice}. You \n{outcome}', font=("Helvetica", 20),
                      text_color="green")
         elif outcome == 'lose':
             score['losses'] += 1

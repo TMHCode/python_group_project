@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from scripts.games.connect_four import connect_four
 from scripts.games.tic_tac_toe import tic_tac_toe_1vs1
-from scripts.games.rock_paper_scissors import PVP
+from scripts.games.rock_paper_scissors import rps_pvp
 from scripts.menus import main_menu
 from scripts.layouts import create_pvp_name_menu_layout
 """
@@ -41,7 +41,7 @@ def main(game: str):
             if game == 'Connect Four':
                 connect_four.main([values['input_p1_name'], values['input_p2_name']])
             elif game == 'Rock-Paper-Scissors':
-                PVP.main([values['input_p1_name'], values['input_p2_name']])
+                rps_pvp.main([values['input_p1_name'], values['input_p2_name']])
             elif game == 'Tic-Tac-Toe':
                 tic_tac_toe_1vs1.main([values['input_p1_name'], values['input_p2_name']])
             break

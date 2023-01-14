@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 import random
 import pickle
-from scripts.layouts import create_RPS_layout
+from scripts.layouts import create_rps_layout
 
 
 def main(n):
     sg.theme('DarkAmber')
 
-    layout = create_RPS_layout(n)
+    layout = create_rps_layout(n)
     window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 500), resizable=True, element_justification='center')
     score = {'wins': 0, 'losses': 0, 'ties': 0}
     score_text = window['-SCORE-']

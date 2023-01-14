@@ -38,6 +38,8 @@ def create_main_menu_layout():
         [sg.Button('Quit', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
+
+
 # ----------
 
 
@@ -65,6 +67,8 @@ def create_mode_menu_layout(game: str):
         [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
+
+
 # ----------
 
 
@@ -94,6 +98,8 @@ def create_pvp_name_menu_layout(game: str):
         [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
+
+
 # ----------
 
 
@@ -122,6 +128,8 @@ def create_pvb_name_menu_layout(game: str):
         [sg.Button('Back', size=(7, 2), font=('Helvetica', 16), border_width=10, button_color=('black', '#B8F1FF'),
                    pad=(0, 0))]
     ]
+
+
 # ----------
 
 
@@ -173,7 +181,7 @@ def create_scoreboard_menu_layout(player_records: dict):
     # Append the top 10 players to the layout
     for i in range(min(10, len(sorted_players))):
         player, records = sorted_players[i]
-        rps_column .append(
+        rps_column.append(
             [sg.Push(), sg.Text(player, size=(10, 0), justification='center'),
              sg.Text(records["Wins"], size=(10, 0), justification='center'),
              sg.Text(records["Draws"], size=(10, 0), justification='center'),
@@ -181,32 +189,34 @@ def create_scoreboard_menu_layout(player_records: dict):
              sg.Text(f'{records["Winrate"]} %', size=(10, 0), justification='center'), sg.Push()])
 
     return [
-            [sg.VPush()],
-            [sg.Push(),
-             sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
-                     justification='center'), sg.Push()],
-            [sg.HSeparator()],
-            [sg.Push(), sg.Text('High scores! - Tic-Tac-Toe', key='high_score_text', size=(30, 2),
-                                font=('Helvetica', 20), justification='center', text_color="#FC9E47"), sg.Push()],
-            [sg.Push(), sg.Text('Player', size=(10, 0), justification='center', text_color='#FFF7E2'),
-             sg.Text('Wins', size=(10, 1), justification='center', text_color='#FFF7E2'),
-             sg.Text('Draws', size=(10, 1), justification='center', text_color='#FFF7E2'),
-             sg.Text('Loses', size=(10, 1), justification='center', text_color='#FFF7E2'),
-             sg.Text('Win Rate', size=(10, 1), justification='center', text_color='#FFF7E2'), sg.Push()],
-            [sg.Column(ttt_column, key='TTT_key', justification='center'),
-             (sg.Column(c4_column, visible=False, key='C4_key', justification='center')),
-             (sg.Column(rps_column, visible=False, key='RPS_key', justification='center'))],
-            [sg.Button('Back', size=(5, 2), font=('Helvetica', 16), border_width=10,
-                       button_color=('black', '#B8F1FF'), pad=(0, 0)),
-                sg.Push(), sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10,
-                                     button_color=('black', "#FCCB53"), pad=(0, 20)),
-                sg.Button('C4', size=(7, 2), font=('Helvetica', 16), border_width=10,
-                          button_color=('black', "#FCCB53"), pad=(0, 20)),
-                sg.Button('RPS', size=(7, 2), font=('Helvetica', 16), border_width=10,
-                          button_color=('black', "#FCCB53"), pad=(0, 20)), sg.Push()],
-            [sg.VPush()]
+        [sg.VPush()],
+        [sg.Push(),
+         sg.Text('Scoreboard', size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+                 justification='center'), sg.Push()],
+        [sg.HSeparator()],
+        [sg.Push(), sg.Text('High scores! - Tic-Tac-Toe', key='high_score_text', size=(30, 2),
+                            font=('Helvetica', 20), justification='center', text_color="#FC9E47"), sg.Push()],
+        [sg.Push(), sg.Text('Player', size=(10, 0), justification='center', text_color='#FFF7E2'),
+         sg.Text('Wins', size=(10, 1), justification='center', text_color='#FFF7E2'),
+         sg.Text('Draws', size=(10, 1), justification='center', text_color='#FFF7E2'),
+         sg.Text('Loses', size=(10, 1), justification='center', text_color='#FFF7E2'),
+         sg.Text('Win Rate', size=(10, 1), justification='center', text_color='#FFF7E2'), sg.Push()],
+        [sg.Column(ttt_column, key='TTT_key', justification='center'),
+         (sg.Column(c4_column, visible=False, key='C4_key', justification='center')),
+         (sg.Column(rps_column, visible=False, key='RPS_key', justification='center'))],
+        [sg.Button('Back', size=(5, 2), font=('Helvetica', 16), border_width=10,
+                   button_color=('black', '#B8F1FF'), pad=(0, 0)),
+         sg.Push(), sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10,
+                              button_color=('black', "#FCCB53"), pad=(0, 20)),
+         sg.Button('C4', size=(7, 2), font=('Helvetica', 16), border_width=10,
+                   button_color=('black', "#FCCB53"), pad=(0, 20)),
+         sg.Button('RPS', size=(7, 2), font=('Helvetica', 16), border_width=10,
+                   button_color=('black', "#FCCB53"), pad=(0, 20)), sg.Push()],
+        [sg.VPush()]
 
     ]
+
+
 # ----------
 ########################################
 
@@ -303,6 +313,8 @@ def create_tic_tac_toe_layout(p_names: list):
          sg.Col(stats_column, background_color='#403731', pad=(30, 0)), sg.Push()],
         [sg.VPush()]
     ]
+
+
 # ----------
 
 
@@ -313,19 +325,26 @@ def create_rps_layout(p_names: list):
     paper_img = os.path.join(current_directory, 'assets', 'paper.png')
     scissors_img = os.path.join(current_directory, 'assets', 'scissor.png')
 
-    return [[sg.Text(f'Current Player: {p_names[0]}', text_color='#FFF7E2',
-                     key='active_player')],
-            [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name')],
-            [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2')],
-            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
-            [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2),
-             sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2),
-             sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors",
-                       image_subsample=2)],
-            [sg.Text('', key='-OUTCOME-')],
-            [sg.Text('', key='-SCORE-', font=("Arial", 20))],
-            [sg.Button('New', size=(10, 10), font=("Arial", 20)),
-             sg.Button('Quit', size=(10, 10), font=("Arial", 20))]]
+    return [
+        [sg.VPush()],
+        [sg.Push()],
+        [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+                 justification='center')],
+        [sg.Text(f"Make your choice {p_names[0]}", font=("Helvetica", 24), pad=(5, 10))],
+        [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(10, 20)),
+         sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10,
+                   pad=(10, 20)),
+         sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="Scissors",
+                   image_subsample=2, size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(10, 20))],
+        [sg.Text('', key='-OUTCOME-')],
+        [sg.Text('', key='-SCORE-', font=("Helvetica", 26))],
+        [sg.Button('Back', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(30, 15), border_width=8),
+         sg.Button('New', size=(14, 2), pad=(30, 15), border_width=10)],
+        [sg.VPush()],
+        [sg.Push()]
+    ]
 
 
 def create_RPS_pvp_layout(p_names: list):
@@ -334,17 +353,29 @@ def create_RPS_pvp_layout(p_names: list):
     paper_img = os.path.join(current_directory, 'assets', 'paper.png')
     scissors_img = os.path.join(current_directory, 'assets', 'scissor.png')
 
-    return [[sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
-            [sg.Text(f'Player 1: {p_names[0]}', background_color='#403731', text_color='#FFF7E2', key='p1_name')],
-            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
-            [sg.Button('', image_filename=rock_img, button_color="white", key="p1-rock", image_subsample=4),
-             sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p1-paper", image_subsample=4),
-             sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p1-scissors",
-                       image_subsample=4)],
-            [sg.Text(f'Player 2: {p_names[1]}', background_color='#403731', text_color='#FFF7E2')],
-            [sg.Text("Make your choice:", font=("Helvetica", 26), text_color="yellow")],
-            [sg.Button('', image_filename=rock_img, button_color="white", key="p2-rock", image_subsample=4),
-             sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p2-paper", image_subsample=4),
-             sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p2-scissors",
-                       image_subsample=4)],
-            [sg.Button('Show'), sg.Exit()]]
+    return [
+        [sg.VPush()],
+        [sg.Push()],
+        [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+                 justification='center')],
+        [sg.Text(f"Make your choice", font=("Helvetica", 26)),
+         sg.Text(f"{p_names[0]}:", background_color='#6F3AFC', font=("Helvetica", 26))],
+        [sg.Button('', image_filename=rock_img, button_color="white", key="p1-rock", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30)),
+         sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p1-paper", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30)),
+         sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p1-scissors", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30))],
+        [sg.Text(f"Make your choice", font=("Helvetica", 26)),
+            sg.Text(f"{p_names[0]}:", background_color='#B8F1FF', text_color='black', font=("Helvetica", 26))],
+        [sg.Button('', image_filename=rock_img, button_color="white", key="p2-rock", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30)),
+         sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p2-paper", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30)),
+         sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p2-scissors", image_subsample=4,
+                   size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30))],
+        [sg.Button('Show', size=(8, 2), border_width=10, font=('Helvetica', 20), pad=(10, 10)),
+         sg.Button('Back', size=(8, 2), button_color=('black', '#B8F1FF'), pad=(50, 15), border_width=8)],
+        [sg.VPush()],
+        [sg.Push()]
+    ]

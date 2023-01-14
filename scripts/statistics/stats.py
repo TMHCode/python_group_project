@@ -69,6 +69,10 @@ def calculate_winrate(player_records: dict):
     """
     for game in player_records:
         for player in player_records[game]:
-            winrate = round(player_records[game][player]['Wins'] / (player_records[game][player]['Wins'] + player_records[game][player]['Loses'] + player_records[game][player]['Draws']), 2)
+            winrate = int(round(player_records[game][player]['Wins'] /
+                                (player_records[game][player]['Wins'] +
+                                 player_records[game][player]['Loses'] +
+                                 player_records[game][player]['Draws']), 2) * 100)
+
             player_records[game][player]['Winrate'] = winrate
     return player_records

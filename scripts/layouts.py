@@ -148,7 +148,7 @@ def create_scoreboard_menu_layout(player_records: dict):
              sg.Text(records["Wins"], size=(10, 0), justification='center'),
              sg.Text(records["Draws"], size=(10, 0), justification='center'),
              sg.Text(records["Loses"], size=(10, 0), justification='center'),
-             sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
+             sg.Text(f'{records["Winrate"]} %', size=(10, 0), justification='center'), sg.Push()])
 
     # --- C4-Stats-Table ---
     c4_column = []
@@ -163,7 +163,7 @@ def create_scoreboard_menu_layout(player_records: dict):
              sg.Text(records["Wins"], size=(10, 0), justification='center'),
              sg.Text(records["Draws"], size=(10, 0), justification='center'),
              sg.Text(records["Loses"], size=(10, 0), justification='center'),
-             sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
+             sg.Text(f'{records["Winrate"]} %', size=(10, 0), justification='center'), sg.Push()])
 
     # --- RPS-Stats-Table ---
     rps_column = []
@@ -178,7 +178,7 @@ def create_scoreboard_menu_layout(player_records: dict):
              sg.Text(records["Wins"], size=(10, 0), justification='center'),
              sg.Text(records["Draws"], size=(10, 0), justification='center'),
              sg.Text(records["Loses"], size=(10, 0), justification='center'),
-             sg.Text(records["Winrate"], size=(10, 0), justification='center'), sg.Push()])
+             sg.Text(f'{records["Winrate"]} %', size=(10, 0), justification='center'), sg.Push()])
 
     return [
             [sg.VPush()],
@@ -194,8 +194,8 @@ def create_scoreboard_menu_layout(player_records: dict):
              sg.Text('Loses', size=(10, 1), justification='center', text_color='#FFF7E2'),
              sg.Text('Win Rate', size=(10, 1), justification='center', text_color='#FFF7E2'), sg.Push()],
             [sg.Column(ttt_column, key='TTT_key', justification='center'),
-             (sg.Column(c4_column, visible=False,key='C4_key', justification='center')),
-             (sg.Column(rps_column, visible=False, key='RPS_key',justification='center'))],
+             (sg.Column(c4_column, visible=False, key='C4_key', justification='center')),
+             (sg.Column(rps_column, visible=False, key='RPS_key', justification='center'))],
             [sg.Button('Back', size=(5, 2), font=('Helvetica', 16), border_width=10,
                        button_color=('black', '#B8F1FF'), pad=(0, 0)),
                 sg.Push(), sg.Button('TTT', size=(7, 2), font=('Helvetica', 16), border_width=10,

@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 import random
 
-from scripts.layouts import create_RPS_layout
+from scripts.layouts import create_rps_layout
 
 
 def main(p_names: list):
     sg.theme('DarkAmber')
 
-    layout = create_RPS_layout(p_names)
+    layout = create_rps_layout(p_names)
     window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 650), resizable=True, element_justification='center')
     score = {'wins': 0, 'losses': 0, 'ties': 0}
     score_text = window['-SCORE-']

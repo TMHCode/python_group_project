@@ -176,7 +176,7 @@ def main(p_names: list):
     while True:
         event, values = window.read()               # get the button click event
 
-        if event is None:                           # fail save
+        if event is None:                           # fail-save
             break
 
         if event == 'Back':                         # when Back button is pressed, go back to the main menu

@@ -3,15 +3,12 @@ from random import choice
 
 from scripts.menus import main_menu
 from scripts.statistics.stats import save_score
-from scripts.games.connect_four.connect_four import check_win, check_full, create_game, switch_player
+from scripts.games.connect_four.connect_four import check_win, check_full, create_game, switch_player, create_pop_up,\
+                                                    ROW_COUNT, COL_COUNT
 """
 This is the file for the connect four game against a simple bot.
-It contains the functions that are necessary to play the game and the main game loop.
+It imports or contains the functions that are necessary to play the game and the main game loop.
 """
-
-# Game constants
-ROW_COUNT = 6
-COL_COUNT = 7
 
 
 # Functions
@@ -68,33 +65,6 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int, valid_turn: bool):
             break
 
     return grid, window, valid_turn
-
-
-def create_pop_up(p_names: list, winner_id: int):
-    """
-    This function creates a pop up when the end of the game is reached.
-    Is can be a Draw or a Win Pop-Up. The player can chose to play another game or to return to the main menu
-    :param p_names: (list) list of players. list-structure: ['name player 1', 'name player 2']
-    :param winner_id: (int) the id of the winner. Can be 0 or 1 (or 2 if it is a draw)
-    :return: p_choice (str) the choice of the player when one of the pop up buttons was clicked. Can be 'Yes' or 'No'.
-    """
-    p_colors = ['#6F3AFC', '#FCF060']
-    if winner_id == 2:      # winner_id is 2 when it is a draw
-        pop_up_layout = [[sg.T('Draw!', font=('Helvetica', 30, 'bold'),
-                               pad=(0, 5), justification='center', text_color='#FC9E47')],
-                         [sg.T('The board is full.', font=('Helvetica', 15),
-                               pad=(0, 30), justification='center', text_color="#FFF7E2")]]
-    else:       # winner_id is 0 or 1
-        pop_up_layout = [[sg.T(p_names[winner_id] + ' wins!', font=('Helvetica', 30, 'bold'),
-                               pad=(0, 5), justification='center', text_color=p_colors[winner_id])]]
-
-    pop_up_layout.append([[sg.T('Do you want to play again?', font=('Helvetica', 15),
-                                pad=(0, 30), justification='center', text_color="#FFF7E2")],
-                          [sg.No(s=10, button_color=('black', '#B8F1FF')),
-                           sg.Yes(s=10, button_color=('black', '#FC9E47'))]])
-
-    p_choice, _ = sg.Window('Game End', pop_up_layout, disable_close=True).read(close=True)
-    return p_choice
 
 
 def main(p_names: list):

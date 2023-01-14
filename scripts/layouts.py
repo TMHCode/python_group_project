@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 import os
-
 """
 This is the layouts file.
 All the Layouts that are needed for the PySimpleGUI functionality are created and stored here.

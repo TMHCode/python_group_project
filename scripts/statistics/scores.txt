@@ -93,3 +93,11 @@ Mario Win ttt
 Tobi Lose ttt
 Mario Win ttt
 Tobi Lose ttt
+Tobi Lose rps
+Tobi Lose rps
+Tobi Win rps
+Tobi Draw rps
+Trung Draw rps
+Tobi Draw rps
+Tobi Win rps
+Trung Lose rps

@@ -1,13 +1,16 @@
 import PySimpleGUI as sg
 
 from scripts.layouts import create_RPS_pvp_layout
+from scripts.menus import main_menu
+from scripts.statistics.stats import save_score
 
 
 def main(p_names: list):
     sg.theme('DarkAmber')
+    game_name = 'rps'
 
     layout = create_RPS_pvp_layout(p_names)
-    window = sg.Window('Rock-Paper-Scissors', layout, size=(1100, 650), resizable=True, element_justification='center')
+    window = sg.Window('Rock-Paper-Scissors', layout, size=(1200, 800), resizable=True, element_justification='center')
 
     p1 = ''
     p2 = ''
@@ -15,6 +18,8 @@ def main(p_names: list):
     while True:
         event, values = window.Read()
         if event in (None, 'Exit'):
+            window.close()
+            main_menu.main()
             break
         elif event == 'p1-rock':
             p1 = 'rock'
@@ -30,11 +35,17 @@ def main(p_names: list):
             p2 = 'scissors'
         elif event == 'Show':
             if p1 == p2:
+                save_score(p_names, "Draw", 0, game_name)
+                save_score(p_names, "Draw", 1, game_name)
                 sg.Popup('Draw')
             elif (p1 == 'rock' and p2 == 'scissors') or (p1 == 'scissors' and p2 == 'paper') or (
                     p1 == 'paper' and p2 == 'rock'):
+                save_score(p_names, "Win", 0, game_name)
+                save_score(p_names, "Lose", 1, game_name)
                 sg.Popup('Player 1 wins!')
             else:
+                save_score(p_names, "Win", 1, game_name)
+                save_score(p_names, "Lose", 0, game_name)
                 sg.Popup('Player 2 wins!')
 
     window.Close()

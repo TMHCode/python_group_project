@@ -6,6 +6,32 @@ from scripts.menus import main_menu
 from scripts.statistics.stats import save_score
 
 
+def compare(player, computer):
+    if player == "Rock":
+        if computer == "Paper":
+            return 'lose'
+        elif computer == "Rock":
+            return 'tie'
+        elif computer == "Scissors":
+            return 'win'
+    elif player == "Paper":
+        if computer == "Scissors":
+            return 'lose'
+        elif computer == "Paper":
+            return 'tie'
+        elif computer == "Rock":
+            return 'win'
+    elif player == "Scissors":
+        if computer == "Rock":
+            return 'lose'
+        elif computer == "Scissors":
+            return 'tie'
+        elif computer == "Paper":
+            return 'win'
+    else:
+        pass
+
+
 def main(p_names: list):
     sg.theme('DarkAmber')
     game_name = "rps"
@@ -17,7 +43,7 @@ def main(p_names: list):
 
     while True:
         event, values = window.read()
-        if event in (None, 'Quit'):
+        if event in (None, 'Back'):
             window.close()
             main_menu.main()
             break
@@ -47,34 +73,3 @@ def main(p_names: list):
                      text_color="yellow")
 
     window.close()
-
-
-def compare(player, computer):
-    if player == "Rock":
-        if computer == "Paper":
-            return 'lose'
-        elif computer == "Rock":
-            return 'tie'
-        elif computer == "Scissors":
-            return 'win'
-    elif player == "Paper":
-        if computer == "Scissors":
-            return 'lose'
-        elif computer == "Paper":
-            return 'tie'
-        elif computer == "Rock":
-            return 'win'
-    elif player == "Scissors":
-        if computer == "Rock":
-            return 'lose'
-        elif computer == "Scissors":
-            return 'tie'
-        elif computer == "Paper":
-            return 'win'
-    else:
-        pass
-
-
-if __name__ == '__main__':
-    p_names = ['john', 'bot']
-    main(p_names)

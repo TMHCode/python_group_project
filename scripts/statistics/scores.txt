@@ -136,3 +136,6 @@ Tobi Lose c4
 1 Lose rps
 1 Lose rps
 1 Lose rps
+1 Draw rps
+2 Win rps
+1 Lose rps

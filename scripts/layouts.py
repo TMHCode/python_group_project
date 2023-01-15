@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import os
+
 """
 This is the layouts file.
 All the Layouts that are needed for the PySimpleGUI functionality are created and stored here.
@@ -319,10 +320,17 @@ def create_tic_tac_toe_layout(p_names: list):
 
 # ----- LAYOUT for rock paper scissors -----
 def create_rps_layout(p_names: list):
-    current_directory = os.path.abspath(os.path.dirname(__file__))
-    rock_img = os.path.join(current_directory, 'assets', 'stone.png')
-    paper_img = os.path.join(current_directory, 'assets', 'paper.png')
-    scissors_img = os.path.join(current_directory, 'assets', 'scissor.png')
+    """
+    This function creates the layout for the Rock - Paper - Scissor game.
+
+    :param p_names: (list) list of players. list-structure: ['name player 1', 'name player 2']
+    :return: (list) layout-structure
+
+    """
+    current_directory = os.path.abspath(os.path.dirname(__file__))  # show path
+    rock_img = os.path.join(current_directory, 'assets', 'stone.png')  # give parameter the position of the png stone
+    paper_img = os.path.join(current_directory, 'assets', 'paper.png')  # give parameter the position of the png paper
+    scissors_img = os.path.join(current_directory, 'assets', 'scissor.png') # give parameter the position of the png scissor
 
     return [
         [sg.VPush()],
@@ -330,7 +338,7 @@ def create_rps_layout(p_names: list):
         [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                  justification='center')],
         [sg.Text(f"Make your choice {p_names[0]}", font=("Helvetica", 24), pad=(5, 10))],
-        [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=0,
+        [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2,
                    size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(10, 20)),
          sg.Button('', image_filename=paper_img, button_color='#ea8953', key="Paper", image_subsample=2,
                    size=(7, 2), font=('Helvetica', 16), border_width=10,
@@ -347,6 +355,14 @@ def create_rps_layout(p_names: list):
 
 
 def create_RPS_pvp_layout(p_names: list):
+    """
+    This function creates the layout for the Rock - Paper - Scissor game.
+
+    :param p_names: (list) list of players. list-structure: ['name player 1', 'name player 2']
+    :return: (list) layout-structure
+
+    """
+
     current_directory = os.path.abspath(os.path.dirname(__file__))
     rock_img = os.path.join(current_directory, 'assets', 'stone.png')
     paper_img = os.path.join(current_directory, 'assets', 'paper.png')
@@ -366,7 +382,7 @@ def create_RPS_pvp_layout(p_names: list):
          sg.Button('', image_filename=scissors_img, button_color='#c7aee4', key="p1-scissors", image_subsample=4,
                    size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30))],
         [sg.Text(f"Make your choice", font=("Helvetica", 26)),
-            sg.Text(f"{p_names[1]}:", background_color='#B8F1FF', text_color='black', font=("Helvetica", 26))],
+         sg.Text(f"{p_names[1]}:", background_color='#B8F1FF', text_color='black', font=("Helvetica", 26))],
         [sg.Button('', image_filename=rock_img, button_color="white", key="p2-rock", image_subsample=4,
                    size=(7, 2), font=('Helvetica', 16), border_width=10, pad=(50, 30), disabled=True),
          sg.Button('', image_filename=paper_img, button_color='#ea8953', key="p2-paper", image_subsample=4,

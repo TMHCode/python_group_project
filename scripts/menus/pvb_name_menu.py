@@ -34,6 +34,9 @@ def main(game: str):
             if values['input_player_name'] == '':                               # check if name is not empty
                 sg.popup('Player name can\'t be empty!')
                 continue
+            elif values['input_player_name'] == 'Bot':
+                sg.popup('Player can\'t be names \'Bot\'')
+                continue
             window.close()
             if game == 'Connect Four':                          # depending on the game that was selected earlier
                 connect_four_bot.main([values['input_player_name'], 'Bot'])     # go to that game

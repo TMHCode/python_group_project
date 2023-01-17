@@ -28,6 +28,7 @@ def check_win(grid: list, player: int):
                            example: [[' ', 1, 1, ' ', 0,...], [' ', 0, 1, ' ', 0,...], [...], ...]
     :param player: (int) index of the current player. Can be 0 or 1
     :return: (bool) returns True if the player wins and False if the player does not win.
+             (list) a list of coordinates of the winning cells
     """
     # Check horizontal win
     for r in range(ROW_COUNT):                          # for every row
@@ -36,7 +37,10 @@ def check_win(grid: list, player: int):
                     and grid[r][c + 1] == player \
                     and grid[r][c + 2] == player \
                     and grid[r][c + 3] == player:       # if 4 adjacent cells are occupied by the same player
-                return True                             # return True
+                return True, ((r, c),
+                              (r, c + 1),
+                              (r, c + 2),
+                              (r, c + 3))               # return True and the winning coordinates
 
     # Check vertical win
     for r in range(ROW_COUNT - 3):                      # for every row except the last 3
@@ -45,7 +49,10 @@ def check_win(grid: list, player: int):
                     and grid[r + 1][c] == player \
                     and grid[r + 2][c] == player \
                     and grid[r + 3][c] == player:       # if 4 adjacent cells are occupied by the same player
-                return True                             # return True
+                return True, ((r, c),
+                              (r + 1, c),
+                              (r + 2, c),
+                              (r + 3, c))               # return True and the winning coordinates
 
     # Check diagonal win (top-left to bottom-right)
     for r in range(ROW_COUNT - 3):                      # for every row except the last 3
@@ -54,7 +61,10 @@ def check_win(grid: list, player: int):
                     and grid[r + 1][c + 1] == player \
                     and grid[r + 2][c + 2] == player \
                     and grid[r + 3][c + 3] == player:   # if 4 adjacent cells are occupied by the same player
-                return True                             # return True
+                return True, ((r, c),
+                              (r + 1, c + 1),
+                              (r + 2, c + 2),
+                              (r + 3, c + 3))           # return True and the winning coordinates
 
     # Check diagonal win (bottom-left to top-right)
     for r in range(3, ROW_COUNT):                      # for every row except the first 3
@@ -63,8 +73,11 @@ def check_win(grid: list, player: int):
                     and grid[r - 1][c + 1] == player \
                     and grid[r - 2][c + 2] == player \
                     and grid[r - 3][c + 3] == player:   # if 4 adjacent cells are occupied by the same player
-                return True                             # return True
-    return False                                # otherwise, if no win condition is met, return False
+                return True, ((r, c),
+                              (r - 1, c + 1),
+                              (r - 2, c + 2),
+                              (r - 3, c + 3))           # return True and the winning coordinates
+    return False, 0                                     # otherwise, if no win condition is met, return False
 
 
 def check_full(grid: list):
@@ -168,6 +181,7 @@ def main(p_names: list):
     sg.SetOptions(font=('Helvetica', 18))           # set the font size of the window
 
     p_background_colors = ['#6F3AFC', '#FCF060']    # set the player colors
+    p_win_colors = ['#9770FF', '#FFFAC0']
     p_text_colors = ['#FFF7E2', '#2C2825']
 
     grid, layout, window, current_player, round_number = create_game(p_names)   # setting up start variables
@@ -203,11 +217,14 @@ def main(p_names: list):
                         window['round_number'].update(f'Round: {round_number}')
                         window[(r, col)].update(button_color=('white', p_background_colors[1]))
                     break
-
-            if check_win(grid, current_player):                         # check if the current player has won
+            won, win_cords = check_win(grid, current_player)
+            if won:                         # check if the current player has won
                 save_score(p_names, "Win", current_player, game_name)   # save the score of the winning player
                 losing_player = 1 if current_player == 0 else 0
                 save_score(p_names, "Lose", losing_player, game_name)   # save the score of the losing player
+                for r in range(4):                                      # change the color of the winning cells
+                    window[(win_cords[r][0],
+                            win_cords[r][1])].update(button_color=p_win_colors[current_player])
                 choice = create_pop_up(p_names, current_player)         # create the win pop-up
 
                 if choice == 'No':                  # check the players pop-up choice

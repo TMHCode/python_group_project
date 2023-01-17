@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from random import choice
+from time import sleep
 
 from scripts.menus import main_menu
 from scripts.statistics.stats import save_score
@@ -38,7 +39,8 @@ def bot_turn(grid: list, window: sg.Window, cur_player: int, valid_turn: bool):
             for r in range(ROW_COUNT - 1, -1, -1):  # check for every cell in the row (from bottom to top)
                 if grid[r][col] == ' ':             # if the specific cell is empty
                     grid[r][col] = 0                # give that cell to the player
-                    if check_win(grid, 0):          # check if the player would win now
+                    won, win_cords = check_win(grid, 0)
+                    if won:                         # check if the player would win now
                         grid[r][col] = ' '          # set the cell to empty again
                         bot_col = col               # determine this column as the bot choice
                         break
@@ -74,6 +76,8 @@ def main(p_names: list):
     :return: NO return value.
     """
     game_name = "c4"                                # needed in the save_score() function
+
+    p_win_colors = ['#9770FF', '#FFFAC0']           # set the player colors
 
     sg.SetOptions(font=('Helvetica', 18))           # set the font size of the window
 
@@ -113,13 +117,19 @@ def main(p_names: list):
                         window[(r, col)].update(button_color=('white', '#6F3AFC'))
                         valid_turn = True
                         break
-
-        if check_win(grid, current_player):                 # check if the current player has won
+        won, win_cords = check_win(grid, current_player)
+        if won:                                             # check if the current player has won
             if current_player == 0:                         # if current_player is the player
                 save_score(p_names, "Win", 0, game_name)    # save the score as a win
+                for r in range(4):                          # change the color of the winning cells
+                    window[(win_cords[r][0],
+                            win_cords[r][1])].update(button_color=p_win_colors[current_player])
                 choice = create_pop_up(p_names, 0)          # create the win pop-up for the player
             else:                                           # if the bot has won
                 save_score(p_names, "Lose", 0, game_name)   # save the score as a lose
+                for r in range(4):                          # change the color of the winning cells
+                    window[(win_cords[r][0],
+                            win_cords[r][1])].update(button_color=p_win_colors[current_player])
                 choice = create_pop_up(p_names, 1)          # create the win pop-up for the bot
 
             if choice == 'No':                  # check the players pop-up choice

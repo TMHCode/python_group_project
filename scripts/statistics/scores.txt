@@ -294,3 +294,11 @@ Bots Draw ttt
 Bots Win ttt
 Bots Win ttt
 Bots Win ttt
+Trung Win rps
+Vik Lose rps
+vik Win rps
+vik Win rps
+Vik Draw ttt
+Vik Lose ttt
+Vik Lose ttt
+Vik Lose ttt

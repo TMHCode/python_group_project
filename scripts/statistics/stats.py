@@ -16,6 +16,9 @@ def save_score(p_names: list, result: str, index: int, game_name: str):
     """
     p_name = p_names[index]                             # get the desired player name from the list
 
+    for name in range(len(p_names)):                    # replace white spaces in the names with '_'
+        p_names[name] = p_names[name].replace(' ', '_')
+
     with open("statistics/scores.txt", "a") as file:    # open the file in append mode
         file.write(p_name + " " + result + " " + game_name + "\n")
 

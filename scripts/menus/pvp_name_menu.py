@@ -37,6 +37,9 @@ def main(game: str):
             elif values['input_p1_name'] == values['input_p2_name']:            # check if names are not the same
                 sg.popup('Player names can\'t be identical!')
                 continue
+            elif len(values['input_p1_name']) > 10 or len(values['input_p2_name']) > 10:    # check that the names are
+                sg.popup('Player names can\'t be longer then 10 characters!')               # not too long
+                continue
             window.close()
             if game == 'Connect Four':                          # depending on the game that was selected earlier
                 connect_four.main([values['input_p1_name'], values['input_p2_name']])   # go to that game

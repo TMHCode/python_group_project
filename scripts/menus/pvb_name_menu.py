@@ -34,8 +34,11 @@ def main(game: str):
             if values['input_player_name'] == '':                               # check if name is not empty
                 sg.popup('Player name can\'t be empty!')
                 continue
-            elif values['input_player_name'] == 'Bot':
+            elif values['input_player_name'] == 'Bot':                          # check if the name is not 'Bot'
                 sg.popup('Player can\'t be names \'Bot\'')
+                continue
+            elif len(values['input_player_name']) > 10:                         # check that the names are
+                sg.popup('Player names can\'t be longer then 10 characters!')   # not too long
                 continue
             window.close()
             if game == 'Connect Four':                          # depending on the game that was selected earlier

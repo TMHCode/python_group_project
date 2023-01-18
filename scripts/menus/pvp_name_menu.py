@@ -7,7 +7,6 @@ from scripts.menus import main_menu
 from scripts.layouts import create_pvp_name_menu_layout
 
 
-
 def main(game):
 
     # Create the layout
@@ -24,6 +23,9 @@ def main(game):
             main_menu.main()
             break
         elif event == 'Continue':
+            if values['input_p1_name'] == '' or values['input_p2_name'] == '':
+                sg.popup('Player name(s) can\'t be empty!')
+                continue
             window.close()
             if game == 'Connect Four':
                 connect_four.main([values['input_p1_name'], values['input_p2_name']])

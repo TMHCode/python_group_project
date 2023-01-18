@@ -22,6 +22,9 @@ def main(game):
             main_menu.main()
             break
         elif event == 'Continue':
+            if values['input_player_name'] == '':
+                sg.popup('Player name can\'t be empty!')
+                continue
             window.close()
             if game == 'Connect Four':
                 connect_four_bot.main([values['input_player_name'], 'Bot'])

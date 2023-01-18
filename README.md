@@ -1,5 +1,14 @@
-# Python Group Project
-> Python course Abschlussprojekt
+# Python Group Project - Minigame collection
+
+#### [Link to the git-hub repo](https://github.com/TMHCode/python_group_project) 👈 
+___
+### How to run
+- download the scripts-folder or clone the repo ```https://github.com/TMHCode/python_group_project.git```
+- have python installed
+- install the PySimpleGUI library
+- run the __main__.py file
+___
+___
 ## Minigame-Collection
 - **Tic-Tac-Toe** _(Viktor)_
 - **Rock-Paper-Scissors** _(Trung)_

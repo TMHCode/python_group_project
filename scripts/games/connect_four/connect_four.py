@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
-from scripts.menus import main_menu
-from scripts.layouts import create_connect_four_layout
-from scripts.statistics.stats import save_score
+from menus import main_menu
+from layouts import create_connect_four_layout
+from statistics.stats import save_score
 """
 This is the file for the connect four game player against player.
 It contains the functions that are necessary to play the game and the main game loop.

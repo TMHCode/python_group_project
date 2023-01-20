@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
-from scripts.layouts import create_scoreboard_menu_layout
-from scripts.menus import main_menu
-from scripts.statistics.stats import load_scores
+from layouts import create_scoreboard_menu_layout
+from menus import main_menu
+from statistics.stats import load_scores
 """
 This is the scoreboard menu file.
 """

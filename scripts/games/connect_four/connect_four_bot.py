@@ -2,9 +2,9 @@ import PySimpleGUI as sg
 from random import choice
 from time import sleep
 
-from scripts.menus import main_menu
-from scripts.statistics.stats import save_score
-from scripts.games.connect_four.connect_four import check_win, check_full, create_game, switch_player, create_pop_up,\
+from menus import main_menu
+from statistics.stats import save_score
+from games.connect_four.connect_four import check_win, check_full, create_game, switch_player, create_pop_up,\
                                                     ROW_COUNT, COL_COUNT
 """
 This is the file for the connect four game against a simple bot.

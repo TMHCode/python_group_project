@@ -1,3 +1,5 @@
+import os
+
 """
 This is the stats file.
 It contains the functions for saving and loading the player statistics.
@@ -19,7 +21,9 @@ def save_score(p_names: list, result: str, index: int, game_name: str):
     for name in range(len(p_names)):                    # replace white spaces in the names with '_'
         p_names[name] = p_names[name].replace(' ', '_')
 
-    with open("statistics/scores.txt", "a") as file:    # open the file in append mode
+    target_dir = os.path.dirname(__file__)           # get the directory of this file to access the scores.txt
+    scores_file = target_dir + '/scores.txt'         # define the path to the scores.txt file
+    with open(scores_file, "a") as file:             # open the file in append mode
         file.write(p_name + " " + result + " " + game_name + "\n")
 
 
@@ -33,7 +37,9 @@ def load_scores():
     """
     # Initialize an empty dictionary to store the win, lose, and draw counts for each player in each game
     player_records = {'ttt': {}, 'c4': {}, 'rps': {}}
-    with open('statistics/scores.txt') as f:                # Open the text file and read the lines
+    target_dir = os.path.dirname(__file__)           # get the directory of this file to access the scores.txt
+    scores_file = target_dir + '/scores.txt'         # define the path to the scores.txt file
+    with open(scores_file, 'r') as f:                # Open the text file and read the lines
         lines = f.readlines()
 
     for line in lines:                                      # Iterate through each line of the file

@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
-from scripts.layouts import create_main_menu_layout
-from scripts.menus import mode_menu, scoreboard_menu
+from layouts import create_main_menu_layout
+from menus import mode_menu, scoreboard_menu
 """
 This is the main menu file.
 """

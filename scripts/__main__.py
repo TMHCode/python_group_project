@@ -1,4 +1,4 @@
-from scripts.menus import main_menu
+from menus import main_menu
 
 """
 This is the main script.

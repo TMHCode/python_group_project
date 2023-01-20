@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 import random
 
-from scripts.layouts import create_rps_layout
-from scripts.menus import main_menu
-from scripts.statistics.stats import save_score
+from layouts import create_rps_layout
+from menus import main_menu
+from statistics.stats import save_score
 
 
 def compare(player, computer):  # function check game rules

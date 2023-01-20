@@ -3,9 +3,9 @@ from random import randrange
 
 import pickle
 
-from scripts.menus import main_menu
-from scripts.layouts import create_tic_tac_toe_layout
-from scripts.statistics.stats import save_score
+from menus import main_menu
+from layouts import create_tic_tac_toe_layout
+from statistics.stats import save_score
 
 
 def create_game(p_names: list):

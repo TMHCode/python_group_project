@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
-from scripts.menus import pvp_name_menu, pvb_name_menu
-from scripts.layouts import create_mode_menu_layout
-from scripts.menus import main_menu
+from menus import pvp_name_menu, pvb_name_menu
+from layouts import create_mode_menu_layout
+from menus import main_menu
 """
 This is the mode menu file.
 """

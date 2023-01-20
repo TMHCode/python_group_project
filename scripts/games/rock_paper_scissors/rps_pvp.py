@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
-from scripts.layouts import create_RPS_pvp_layout
-from scripts.menus import main_menu
-from scripts.statistics.stats import save_score
+from layouts import create_RPS_pvp_layout
+from menus import main_menu
+from statistics.stats import save_score
 
 """
 This is the file for the rock paper scissor game player versus player.

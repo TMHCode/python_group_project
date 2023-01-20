@@ -1,10 +1,10 @@
 import PySimpleGUI as sg
 
-from scripts.games.connect_four import connect_four
-from scripts.games.tic_tac_toe import tic_tac_toe_1vs1
-from scripts.games.rock_paper_scissors import rps_pvp
-from scripts.menus import main_menu
-from scripts.layouts import create_pvp_name_menu_layout
+from games.connect_four import connect_four
+from games.tic_tac_toe import tic_tac_toe_1vs1
+from games.rock_paper_scissors import rps_pvp
+from menus import main_menu
+from layouts import create_pvp_name_menu_layout
 """
 This is the PVP name menu file.
 """

@@ -1,10 +1,10 @@
 import PySimpleGUI as sg
 
-from scripts.games.connect_four import connect_four_bot
-from scripts.games.tic_tac_toe import tic_tac_toe_vs_bot
-from scripts.games.rock_paper_scissors import rps_pvb
-from scripts.menus import main_menu
-from scripts.layouts import create_pvb_name_menu_layout
+from games.connect_four import connect_four_bot
+from games.tic_tac_toe import tic_tac_toe_vs_bot
+from games.rock_paper_scissors import rps_pvb
+from menus import main_menu
+from layouts import create_pvb_name_menu_layout
 """
 This is the PVB name menu file.
 """

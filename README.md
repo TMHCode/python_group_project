@@ -6,7 +6,7 @@ ___
 - download the scripts-folder or clone the repo ```https://github.com/TMHCode/python_group_project.git```
 - have python installed
 - install the PySimpleGUI library ```pip install PySimpleGUI```
-- run the __main__.py file
+- run the ```__main__.py``` file inside the 'scripts' folder ```python __main__.py```
 ___
 ___
 ## Minigame-Collection

@@ -384,3 +384,17 @@ portkey Lose c4
 gillyweed Lose rps
 dobby Win rps
 portkey Lose rps
+malfoy Win c4
+Tobi Lose c4
+Tobi Win c4
+malfoy Lose c4
+Tobi Win c4
+malfoy Lose c4
+Tobi Win c4
+malfoy Lose c4
+Tobi Win c4
+malfoy Lose c4
+Tobi Win c4
+malfoy Lose c4
+Tobi Win c4
+malfoy Lose c4

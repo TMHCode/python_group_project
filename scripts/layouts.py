@@ -335,7 +335,7 @@ def create_rps_layout(p_names: list):
     return [
         [sg.VPush()],
         [sg.Push()],
-        [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+        [sg.Text("Rock-Paper-Scissors", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                  justification='center')],
         [sg.Text(f"Make your choice {p_names[0]}", font=("Helvetica", 24), pad=(5, 10))],
         [sg.Button('', image_filename=rock_img, button_color="white", key="Rock", image_subsample=2,
@@ -371,7 +371,7 @@ def create_RPS_pvp_layout(p_names: list):
     return [
         [sg.VPush()],
         [sg.Push()],
-        [sg.Text("Rock-Paper-Scissor", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
+        [sg.Text("Rock-Paper-Scissors", size=(30, 1), pad=(10, 20), font=('Helvetica', 50, 'bold'), text_color='#FFF7E2',
                  justification='center')],
         [sg.Text(f"Make your choice", font=("Helvetica", 26)),
          sg.Text(f"{p_names[0]}:", background_color='#6F3AFC', font=("Helvetica", 26))],

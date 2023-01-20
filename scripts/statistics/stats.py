@@ -78,4 +78,5 @@ def calculate_winrate(player_records: dict):
                                  player_records[game][player]['Draws']), 2) * 100)  # calculate the win rate
 
             player_records[game][player]['Winrate'] = winrate                       # and add it to the dictionary
+            print(player_records)
     return player_records                                                           # return the dictionary
